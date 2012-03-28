@@ -20,9 +20,9 @@ describe("JQueryTree", function() {
       tree = new JQueryTree(data);
 
       [0,1,2,3].forEach(function(i){
-        root_html = $('<p></p>').append($(tree.el).eq(i)).html();
-        expect(root_html).toContain('<div class="root">');
-        expect($(tree.el).eq(i).text()).toBe('root'+i);
+        expect(tree.roots()[0].tagName).toBe('DIV');
+        expect(tree.roots()[0].className).toBe('root');
+        expect(tree.roots().eq(i).text()).toBe('root'+i);
       });
     });
 
@@ -30,13 +30,11 @@ describe("JQueryTree", function() {
       data = [{name: 'root0', children: [{name:'child0'},
                                          {name:'child1'}]}];
       tree = new JQueryTree(data);
-      root = $('<p></p>').append($(tree.el));
 
-      expect(root.eq(0).find('.node1').length).toBe(2);
-      expect(root.eq(0).find('.node1:eq(0)').text()).toBe('child0');
-      expect(root.eq(0).find('.node1:eq(1)').text()).toBe('child1');
+      expect(tree.nodes(1).length).toBe(2);
+      expect(tree.nodes(1).eq(0).text()).toBe('child0');
+      expect(tree.nodes(1).eq(1).text()).toBe('child1');
     });
-
 
   });
 
