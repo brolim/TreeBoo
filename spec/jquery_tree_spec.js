@@ -18,11 +18,23 @@ describe("JQueryTree", function() {
               {name: 'root2'}, 
               {name: 'root3'}];
       tree = new JQueryTree(data);
-      
+
       [0,1,2,3].forEach(function(i){
-        expect($('<p></p>').append($(tree.el).eq(i)).html()).toContain('<div class="root">');
+        root_html = $('<p></p>').append($(tree.el).eq(i)).html();
+        expect(root_html).toContain('<div class="root">');
         expect($(tree.el).eq(i).text()).toBe('root'+i);
       });
+    });
+
+    it("renders two level1 children with their names and divs", function() {
+      data = [{name: 'root0', children: [{name:'child0'},
+                                         {name:'child1'}]}];
+      tree = new JQueryTree(data);
+      root = $('<p></p>').append($(tree.el));
+
+      expect(root.eq(0).find('.node1').length).toBe(2);
+      expect(root.eq(0).find('.node1:eq(0)').text()).toBe('child0');
+      expect(root.eq(0).find('.node1:eq(1)').text()).toBe('child1');
     });
 
 
