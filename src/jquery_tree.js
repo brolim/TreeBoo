@@ -1,3 +1,12 @@
+node_template = _.template("\n\
+<div class='<%= div_class %>' style='<%= div_style %>'>\n\
+  <span class='marker'></span>\n\
+  <span class='name'>\n\
+    <%= name %>\n\
+  </span>\n\
+  <div class='children'></div>\n\
+</div>");
+
 JQueryTree = function(data_tree){
   this.all_nodes = [];
   this.el = this._create_html_string(data_tree, true);
@@ -19,6 +28,11 @@ JQueryTree.prototype._create_html_string = function(data_tree, is_root, level) {
   self = this;
   var tree_html_string = ''
   data_tree.forEach(function(node){
+
+    console.log($(node_template({name:node.name, div_style:style, div_class:div_class})));
+    // self.aaa = self.template({name:node.name, div_style:style, div_class:div_class});
+    // console.log(self.aaa)
+
     var node_html_string = '<div class="' + div_class +'" ' + style +' ">' + 
                              '<span class="marker"></span>' +
                              '<span class="name">' + node.name + '</span>';

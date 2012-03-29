@@ -41,6 +41,12 @@ describe("JQueryTree", function() {
       expect(tree.nodes(1).eq(1).text()).toBe('child1');
     });
 
+    it("renders span.markers for all nodes", function() {
+      tree.nodes().toArray().forEach(function(node) {
+        expect($(node).find('.marker:eq(0)').length).toBe(1);
+      });
+    });
+
   });
 
   describe("data structure", function() {
@@ -76,7 +82,7 @@ describe("JQueryTree", function() {
 
     // it("when a node is clicked, it toggle visibility of the straight children nodes", function() {
     //   tree.nodes(0).eq(0).click();
-    //   tree.nodes(0).eq(0).click());
+    //   tree.nodes(0).eq(0).click();
 
     // });
 

@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"bord",
+				"border	border: size style color"
+			],
+			[
+				"node",
+				"node_html_string"
+			],
+			[
+				"fun",
+				"fun	Function"
+			],
+			[
+				"chil",
+				"children"
+			],
+			[
+				"na",
+				"name"
+			],
+			[
+				"nodes",
+				"nodes_level2"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"roo",
+				"root3"
+			],
+			[
+				"root",
+				"root2"
+			],
+			[
+				"c",
+				"child2"
+			],
+			[
+				"div",
+				"div_class"
+			],
+			[
+				"nam",
+				"name1"
+			],
+			[
 				"questos",
 				"questoes_ja_carregadas"
 			],
@@ -396,10 +444,6 @@
 				"NAO_INICIADA"
 			],
 			[
-				"na",
-				"nao_respondidas"
-			],
-			[
 				"cor",
 				"corrigidas"
 			],
@@ -470,55 +514,51 @@
 			[
 				"questao",
 				"questao1"
-			],
-			[
-				"id",
-				"id_prova"
-			],
-			[
-				"class",
-				"class_name"
-			],
-			[
-				"any_",
-				"any_of"
-			],
-			[
-				"ex",
-				"exists"
-			],
-			[
-				"comenta",
-				"comentarios"
-			],
-			[
-				"comen",
-				"comentarios"
-			],
-			[
-				"wid",
-				"width_caixa"
-			],
-			[
-				"margin_",
-				"margin_left_seta"
-			],
-			[
-				"too",
-				"tooltip"
-			],
-			[
-				"mapa",
-				"mapa_tooltip"
-			],
-			[
-				"assu",
-				"assunto1"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "src/jquery_tree.js",
+			"settings":
+			{
+				"buffer_size": 1432,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "spec/jquery_tree_spec.js",
+			"settings":
+			{
+				"buffer_size": 3284,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "spec/visual_spec.html",
+			"settings":
+			{
+				"buffer_size": 871,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "style/jquery_tree.css",
+			"settings":
+			{
+				"buffer_size": 120,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "spec/spec_runner.html",
+			"settings":
+			{
+				"buffer_size": 873,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -544,6 +584,8 @@
 	},
 	"file_history":
 	[
+		"/home/brolim/projetos/dojo/jquery_tree/README",
+		"/home/brolim/projetos/dojo/jquery_tree/spec/spec_runner.html",
 		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/controllers/questoes_controller.rb",
 		"/home/brolim/projetos/mapa_da_prova/mapa_app/spec/controllers/questoes_controller_spec.rb",
 		"/home/brolim/projetos/mapa_da_prova/mapa_app/spec/controllers/planos_estudo_controller_spec.rb",
@@ -669,9 +711,7 @@
 		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/models/assunto_dashboard.rb",
 		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/assets/javascripts/backbone.js",
 		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/assets/javascripts/ajustes_ie.js",
-		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/assets/javascripts/src/views/dashboard/DashboardView.coffee",
-		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/views/sessoes/show.html.erb",
-		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/models/concurso_dashboard.rb"
+		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/assets/javascripts/src/views/dashboard/DashboardView.coffee"
 	],
 	"find":
 	{
@@ -690,6 +730,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"roots()",
+			"html_string",
+			"tree_html_string",
+			"html_string",
+			"span:eq(0)",
+			"nodes(0)",
+			"lib/jasmine-1.0.2/",
 			"params",
 			"assunto_id",
 			"gt",
@@ -810,14 +857,7 @@
 			"materia",
 			"outra_materia",
 			"materia",
-			"conta_",
-			"conta_por_materia_e_prova",
-			"@contagem",
-			"conta",
-			"this",
-			"value",
-			"prova1._id",
-			"@prova11"
+			"conta_"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -840,8 +880,149 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/jquery_tree.js",
+					"settings":
+					{
+						"buffer_size": 1432,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								259,
+								259
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "spec/jquery_tree_spec.js",
+					"settings":
+					{
+						"buffer_size": 3284,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3280,
+								3280
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "spec/visual_spec.html",
+					"settings":
+					{
+						"buffer_size": 871,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								435,
+								435
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "style/jquery_tree.css",
+					"settings":
+					{
+						"buffer_size": 120,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								31,
+								31
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "spec/spec_runner.html",
+					"settings":
+					{
+						"buffer_size": 873,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								481,
+								481
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
