@@ -12,21 +12,21 @@ describe("JQueryTree", function() {
     
     it("renders roots and children nodes", function() {
       expect(tree.nodes(0).length).toBe(3); // tree.nodes(0) is the same
-      expect(tree.nodes(0).eq(0).find('.name:eq(0)').text()).toBe('node1');
-      expect(tree.nodes(0).eq(1).find('.name:eq(0)').text()).toBe('node2');
-      expect(tree.nodes(0).eq(2).find('.name:eq(0)').text()).toBe('node3');
+      expect(tree.nodes(0).eq(0).find('.name:eq(0)').text().trim()).toBe('node1');
+      expect(tree.nodes(0).eq(1).find('.name:eq(0)').text().trim()).toBe('node2');
+      expect(tree.nodes(0).eq(2).find('.name:eq(0)').text().trim()).toBe('node3');
 
       expect(tree.nodes(1).length).toBe(6);
-      expect(tree.nodes(1).eq(0).find('.name:eq(0)').text()).toBe('node1.1');
-      expect(tree.nodes(1).eq(1).find('.name:eq(0)').text()).toBe('node1.2');
-      expect(tree.nodes(1).eq(2).find('.name:eq(0)').text()).toBe('node2.1');
-      expect(tree.nodes(1).eq(3).find('.name:eq(0)').text()).toBe('node2.2');
-      expect(tree.nodes(1).eq(4).find('.name:eq(0)').text()).toBe('node3.1');
-      expect(tree.nodes(1).eq(5).find('.name:eq(0)').text()).toBe('node3.2');
+      expect(tree.nodes(1).eq(0).find('.name:eq(0)').text().trim()).toBe('node1.1');
+      expect(tree.nodes(1).eq(1).find('.name:eq(0)').text().trim()).toBe('node1.2');
+      expect(tree.nodes(1).eq(2).find('.name:eq(0)').text().trim()).toBe('node2.1');
+      expect(tree.nodes(1).eq(3).find('.name:eq(0)').text().trim()).toBe('node2.2');
+      expect(tree.nodes(1).eq(4).find('.name:eq(0)').text().trim()).toBe('node3.1');
+      expect(tree.nodes(1).eq(5).find('.name:eq(0)').text().trim()).toBe('node3.2');
 
       expect(tree.nodes(2).length).toBe(2);
-      expect(tree.nodes(2).eq(0).find('.name:eq(0)').text()).toBe('node1.1.1');
-      expect(tree.nodes(2).eq(1).find('.name:eq(0)').text()).toBe('node1.1.2');
+      expect(tree.nodes(2).eq(0).find('.name:eq(0)').text().trim()).toBe('node1.1.1');
+      expect(tree.nodes(2).eq(1).find('.name:eq(0)').text().trim()).toBe('node1.1.2');
 
       expect(tree.nodes(3).length).toBe(0);
     });
@@ -37,8 +37,8 @@ describe("JQueryTree", function() {
       tree = new JQueryTree(data);
 
       expect(tree.nodes(1).length).toBe(2);
-      expect(tree.nodes(1).eq(0).text()).toBe('child0');
-      expect(tree.nodes(1).eq(1).text()).toBe('child1');
+      expect(tree.nodes(1).eq(0).text().trim()).toBe('child0');
+      expect(tree.nodes(1).eq(1).text().trim()).toBe('child1');
     });
 
     it("renders span.markers for all nodes", function() {

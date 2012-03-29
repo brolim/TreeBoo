@@ -1,5 +1,5 @@
-node_template = _.template("\n\
-<div class='<%= div_class %>' style='<%= div_style %>'>\n\
+_node_template = _.template("\n\
+<div id='jqt<%= node_id %>' class='<%= div_class %>' style='<%= div_style %>'>\n\
   <span class='marker'></span>\n\
   <span class='name'>\n\
     <%= name %>\n\
@@ -8,45 +8,40 @@ node_template = _.template("\n\
 </div>");
 
 JQueryTree = function(data_tree){
+  _node_id = -1;
   this.all_nodes = [];
-  this.el = this._create_html_string(data_tree, true);
+  this.el = this._create_node_recursive(data_tree, true);
+  console.log(this.el);
 };
 
-JQueryTree.prototype._create_html_string = function(data_tree, is_root, level) {
+JQueryTree.prototype._create_node_recursive = function(data_tree, is_root, level) {
 
   var div_class = undefined;
   var style = undefined
   if(is_root){
     div_class = 'root'
-    style = ' style="display:block"; '
+    style = "display:block;";
     level = 0;
   } else{
-    style = ' style="display:none"; '
+    style = "display:none;";
     div_class = 'node level' + level;
   }
 
   self = this;
-  var tree_html_string = ''
+  var node_jquery = $('<p></p>');
   data_tree.forEach(function(node){
 
-    console.log($(node_template({name:node.name, div_style:style, div_class:div_class})));
-    // self.aaa = self.template({name:node.name, div_style:style, div_class:div_class});
-    // console.log(self.aaa)
+    node_jquery.append($(_node_template({node_id:(++_node_id), name:node.name, div_style:style, div_class:div_class})));
+    // console.log(node_jquery);
 
-    var node_html_string = '<div class="' + div_class +'" ' + style +' ">' + 
-                             '<span class="marker"></span>' +
-                             '<span class="name">' + node.name + '</span>';
     if(node.children){
-      node_html_string += self._create_html_string(node.children, false, level+1);
+      var jquery_selector = '#jqt'+_node_id+' .children:eq(0)';
+      node_jquery.find(jquery_selector).append(self._create_node_recursive(node.children, false, level+1));
     }
-    node_html_string += '</div>';
-
-    self.all_nodes.push(new Node(node.name, node_html_string));
-
-    tree_html_string += node_html_string;
+    self.all_nodes.push(new Node(node.name, _node_id));
   });
 
-  return tree_html_string;
+  return node_jquery.html();
 };
 
 JQueryTree.prototype.nodes = function(level) {
@@ -62,7 +57,7 @@ JQueryTree.prototype.roots = function() {
   return this.nodes(0);
 };
 
-Node = function(name, html_string) {
+Node = function(name, div_id) {
   this.name = name
-  this.html_string = html_string
+  this.div_id = div_id
 }
