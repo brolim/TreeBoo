@@ -11,6 +11,11 @@ JQueryTree = function(data_tree){
   _node_id = -1;
   this.all_nodes = [];
   this.el = this._create_node_recursive(data_tree);
+
+  self = this;
+  this.all_nodes.forEach(function(node) {
+    node.tree = self;
+  });
 };
 
 JQueryTree.prototype._create_node_recursive = function(data_tree, level) {
@@ -34,6 +39,9 @@ JQueryTree.prototype._create_node_recursive = function(data_tree, level) {
 };
 
 JQueryTree.prototype.nodes = function(level) {
+  if(level==undefined)
+    return this.all_nodes;
+
   nodes = []
   this.all_nodes.forEach(function(node) {
     if(node.level == level)
@@ -43,8 +51,8 @@ JQueryTree.prototype.nodes = function(level) {
   return nodes
 };
 
-JQueryTree.prototype.jquery_nodes = function(level) {
-  nodes = [];
+JQueryTree.prototype.nodes_as_jquery = function(level) {
+  var nodes = [];
   this.nodes(level).forEach(function(node) {
     nodes.push($('<p></p>').append(tree.el).find('#'+node.div_id));
   });
@@ -55,4 +63,13 @@ Node = function(name, div_id, level) {
   this.name = name;
   this.div_id = div_id;
   this.level = level;
-}
+};
+
+Node.prototype.render = function() {
+};
+
+Node.prototype.slide_toggle = function() {
+  children = $('<p></p>').append(this.tree.el).find('#'+this.div_id).find('div.children:eq(0)');
+  console.log(children);
+  children.show();
+};

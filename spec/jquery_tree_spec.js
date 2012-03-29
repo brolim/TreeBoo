@@ -46,73 +46,89 @@ describe("JQueryTree", function() {
                                          {name:'child1'}]}];
       tree = new JQueryTree(data);
 
-      expect(tree.jquery_nodes(1).length).toBe(2);
-      expect(tree.jquery_nodes(1).eq(0).text().trim()).toBe('child0');
-      expect(tree.jquery_nodes(1).eq(1).text().trim()).toBe('child1');
+      expect(tree.nodes_as_jquery(1).length).toBe(2);
+      expect(tree.nodes_as_jquery(1)[0].text().trim()).toBe('child0');
+      expect(tree.nodes_as_jquery(1)[1].text().trim()).toBe('child1');
     });
 
-    // it("renders span.markers for all nodes", function() {
-    //   tree.nodes().toArray().forEach(function(node) {
-    //     expect($(node).find('.marker:eq(0)').length).toBe(1);
-    //   });
-    // });
+    it("renders span.markers for all nodes", function() {
+      tree.nodes_as_jquery().forEach(function(node) {
+        expect(node.find('.marker:eq(0)').length).toBe(1);
+      });
+    });
 
   });
 
-//   describe("data structure", function() {
-//     it("all methods to get nodes return an array of Node objects", function() {
-//       expect(tree.all_nodes.length).toBe(11);
-//       tree.all_nodes.forEach(function(node) {
-//         expect(node instanceof Node).toBe(true);
-//       });
-//     });
-//   });
+  describe("data structure", function() {
+    it("all_nodes attr and nodes() method return an array of Node objects", function() {
+      expect(tree.all_nodes.length).toBe(11);
+      tree.all_nodes.forEach(function(node) {
+        expect(node instanceof Node).toBe(true);
+      });
+      tree.nodes(0).forEach(function(node) {
+        expect(node instanceof Node).toBe(true);
+      });
+    });
 
-//   describe("openings and closings children nodes", function() {
+    it("has same id of html element", function() {
+      root0 = tree.nodes_as_jquery(0)[0];
+      node0 = tree.nodes(0)[0];
+      expect(node0.div_id).toBe(root0.attr('id'));
+    });
 
+  });
 
-//     it("starts with all root nodes colapsed", function() {
-//       expect(tree.nodes().length).toBe(11);
-
-//       //roots      
-//       tree.nodes(0).toArray().forEach(function(node){
-//         expect($(node).css('display')).toBe('block');
-//         expect($(node).find('.children:eq(0)').css('display')).toBe('none');
-//       });
-//     });
-
-//     // it("when a node is clicked, it toggle visibility of the straight children nodes", function() {
-//     //   tree.nodes(0).eq(0).click();
-//     //   tree.nodes(0).eq(0).click();
-
-//     // });
+  describe("openings and closings children nodes", function() {
 
 
+    it("starts with all root nodes colapsed", function() {
+      expect(tree.nodes().length).toBe(11);
 
-//   });
+      //roots      
+      tree.nodes_as_jquery(0).forEach(function(node){
+        expect(node.css('display')).toBe('block');
+        expect(node.find('.children:eq(0)').css('display')).toBe('none');
+      });
+    });
+
+  });
 });
 
 // // ========================================================
 // //      class Node documentation
 // // ========================================================
-// describe("Node", function() {
+describe("Node", function() {
 
-//   beforeEach(function () {
-//     root1 = {name: 'node1', children: [{name:'node1.1', children: [{name:'node1.1.1'}, {name:'node1.1.2'}]}, 
-//                                        {name:'node1.2'}]},
-//     root2 = {name: 'node2', children: [{name:'node2.1'}, {name:'node2.2'}]}
-//     root3 = {name: 'node3', children: [{name:'node3.1'}, {name:'node3.2'}]}
-//     tree = new JQueryTree([root1, root2, root3]);
-//   });
+  beforeEach(function () {
+    root1 = {name: 'node1', children: [{name:'node1.1', children: [{name:'node1.1.1'}, {name:'node1.1.2'}]}, 
+                                       {name:'node1.2'}]},
+    root2 = {name: 'node2', children: [{name:'node2.1'}, {name:'node2.2'}]}
+    root3 = {name: 'node3', children: [{name:'node3.1'}, {name:'node3.2'}]}
+    tree = new JQueryTree([root1, root2, root3]);
 
-//   describe("toggle_node", function() {
+    node = tree.all_nodes[0];
+    node_jquery = tree.nodes_as_jquery(0)[0];
+    expect(node.div_id).toBe(node_jquery.attr('id'));
 
-//     it("togles its html div element", function() {
-//       root0 = tree.nodes(0).eq(0);
-//       node0 = tree.all_nodes[0];
-//       expect(node0.div_id).toBe(root0.attr('id'));
-//     });
+  });
 
-//   });
+  describe("slide div.children down and up", function() {
+
+    it("starts with div.children hidden", function() {
+      expect(node_jquery.find('div.children:eq(0)').css('display')).toBe('none');
+    });
+
+    it("changes display in html when slide_toggle on node is called", function() {
+      node.slide_toggle();
+      expect(node_jquery.find('div.children:eq(0)').css('display')).toBe('block');
+    });
+
+    // it("togles its html div.children visibility", function() {
+    //   tree.nodes(0).eq(0).click();
+    //   tree.nodes(0).eq(0).click();
+
+    // });
+
+  });
   
-// });
+});

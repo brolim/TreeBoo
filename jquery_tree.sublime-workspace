@@ -4,12 +4,56 @@
 		"selected_items":
 		[
 			[
-				"bord",
-				"border	border: size style color"
+				"jq",
+				"jquery_nodes"
+			],
+			[
+				"class",
+				"className"
+			],
+			[
+				"di",
+				"div"
+			],
+			[
+				"div",
+				"div_id"
+			],
+			[
+				"roo",
+				"root0"
+			],
+			[
+				"fi",
+				"first_root"
+			],
+			[
+				"all",
+				"all_nodes"
 			],
 			[
 				"node",
-				"node_html_string"
+				"node_id"
+			],
+			[
+				"node_",
+				"_node_id"
+			],
+			[
+				"_c",
+				"_create_jquery_tree"
+			],
+			[
+				"a",
+				"append"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"bord",
+				"border	border: size style color"
 			],
 			[
 				"fun",
@@ -32,20 +76,12 @@
 				"margin-left"
 			],
 			[
-				"roo",
-				"root3"
-			],
-			[
 				"root",
 				"root2"
 			],
 			[
 				"c",
 				"child2"
-			],
-			[
-				"div",
-				"div_class"
 			],
 			[
 				"nam",
@@ -478,42 +514,6 @@
 			[
 				"reso",
 				"resource"
-			],
-			[
-				"subt",
-				"subtopicos"
-			],
-			[
-				"tol",
-				"tooltip_config"
-			],
-			[
-				"op",
-				"opacity"
-			],
-			[
-				"fla",
-				"flash	flash[…]"
-			],
-			[
-				"esc",
-				"esconde_se_for_enter"
-			],
-			[
-				"cole",
-				"colecao"
-			],
-			[
-				"db",
-				"db_localhost"
-			],
-			[
-				"en",
-				"environment"
-			],
-			[
-				"questao",
-				"questao1"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "src/jquery_tree.js",
 			"settings":
 			{
-				"buffer_size": 1432,
+				"buffer_size": 1466,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,7 +531,7 @@
 			"file": "spec/jquery_tree_spec.js",
 			"settings":
 			{
-				"buffer_size": 3284,
+				"buffer_size": 4667,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +539,7 @@
 			"file": "spec/visual_spec.html",
 			"settings":
 			{
-				"buffer_size": 871,
+				"buffer_size": 945,
 				"line_ending": "Unix"
 			}
 		},
@@ -555,7 +555,7 @@
 			"file": "spec/spec_runner.html",
 			"settings":
 			{
-				"buffer_size": 873,
+				"buffer_size": 947,
 				"line_ending": "Unix"
 			}
 		}
@@ -584,6 +584,7 @@
 	},
 	"file_history":
 	[
+		"/home/brolim/projetos/dojo/jquery_tree/src/templates.html",
 		"/home/brolim/projetos/dojo/jquery_tree/README",
 		"/home/brolim/projetos/dojo/jquery_tree/spec/spec_runner.html",
 		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/controllers/questoes_controller.rb",
@@ -710,8 +711,7 @@
 		"/home/brolim/projetos/mapa_da_prova/mapa_app/spec/spec_helper.rb",
 		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/models/assunto_dashboard.rb",
 		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/assets/javascripts/backbone.js",
-		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/assets/javascripts/ajustes_ie.js",
-		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/assets/javascripts/src/views/dashboard/DashboardView.coffee"
+		"/home/brolim/projetos/mapa_da_prova/mapa_app/app/assets/javascripts/ajustes_ie.js"
 	],
 	"find":
 	{
@@ -730,6 +730,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"className",
+			"console",
+			"jquery_nodes",
+			"level",
+			"nodes(",
+			"level0",
+			"text()",
+			"node_id",
+			"node_template",
+			"_create_jquery_tree",
 			"roots()",
 			"html_string",
 			"tree_html_string",
@@ -847,17 +857,7 @@
 			"questao._mate",
 			"<%=",
 			"notice",
-			"dash",
-			"provas",
-			"arq",
-			"provas",
-			"prova3",
-			"dash",
-			"prova_ids",
-			"materia",
-			"outra_materia",
-			"materia",
-			"conta_"
+			"dash"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -880,7 +880,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -888,15 +888,15 @@
 					"file": "src/jquery_tree.js",
 					"settings":
 					{
-						"buffer_size": 1432,
+						"buffer_size": 1466,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								259,
-								259
+								1341,
+								1341
 							]
 						],
 						"settings":
@@ -906,7 +906,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 306.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -916,15 +916,15 @@
 					"file": "spec/jquery_tree_spec.js",
 					"settings":
 					{
-						"buffer_size": 3284,
+						"buffer_size": 4667,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3280,
-								3280
+								2573,
+								2573
 							]
 						],
 						"settings":
@@ -944,15 +944,15 @@
 					"file": "spec/visual_spec.html",
 					"settings":
 					{
-						"buffer_size": 871,
+						"buffer_size": 945,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								435,
-								435
+								276,
+								276
 							]
 						],
 						"settings":
@@ -1000,15 +1000,15 @@
 					"file": "spec/spec_runner.html",
 					"settings":
 					{
-						"buffer_size": 873,
+						"buffer_size": 947,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								481,
-								481
+								796,
+								796
 							]
 						],
 						"settings":
