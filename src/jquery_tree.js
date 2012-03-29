@@ -11,7 +11,6 @@ JQueryTree = function(data_tree){
   _node_id = -1;
   this.all_nodes = [];
   this.el = this._create_node_recursive(data_tree, true);
-  console.log(this.el);
 };
 
 JQueryTree.prototype._create_node_recursive = function(data_tree, is_root, level) {
@@ -24,8 +23,9 @@ JQueryTree.prototype._create_node_recursive = function(data_tree, is_root, level
     level = 0;
   } else{
     style = "display:none;";
-    div_class = 'node level' + level;
+    div_class = 'node';
   }
+  div_class += ' level' + level
 
   self = this;
   var node_jquery = $('<p></p>');

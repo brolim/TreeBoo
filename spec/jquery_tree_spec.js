@@ -31,6 +31,12 @@ describe("JQueryTree", function() {
       expect(tree.nodes(3).length).toBe(0);
     });
 
+    it("renders all roots with class level0", function() {
+      $(tree.el).toArray().forEach(function(root) {
+        expect(root.className).toBe('root level0');
+      });
+    });    
+
     it("renders two level1 children with their names and divs", function() {
       data = [{name: 'root0', children: [{name:'child0'},
                                          {name:'child1'}]}];
