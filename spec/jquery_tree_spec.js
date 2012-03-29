@@ -11,11 +11,10 @@ describe("JQueryTree", function() {
   describe("rendering", function() {
     
     it("renders roots and children nodes", function() {
-      expect(tree.roots().length).toBe(3);
-      expect(tree.nodes(0).length).toBe(3); // tree.roots() is the same
-      expect(tree.roots().eq(0).find('.name:eq(0)').text()).toBe('node1');
-      expect(tree.roots().eq(1).find('.name:eq(0)').text()).toBe('node2');
-      expect(tree.roots().eq(2).find('.name:eq(0)').text()).toBe('node3');
+      expect(tree.nodes(0).length).toBe(3); // tree.nodes(0) is the same
+      expect(tree.nodes(0).eq(0).find('.name:eq(0)').text()).toBe('node1');
+      expect(tree.nodes(0).eq(1).find('.name:eq(0)').text()).toBe('node2');
+      expect(tree.nodes(0).eq(2).find('.name:eq(0)').text()).toBe('node3');
 
       expect(tree.nodes(1).length).toBe(6);
       expect(tree.nodes(1).eq(0).find('.name:eq(0)').text()).toBe('node1.1');
@@ -44,19 +43,43 @@ describe("JQueryTree", function() {
 
   });
 
-  // describe("openings and closings children nodes", function() {
+  describe("data structure", function() {
+    it("all methods to get nodes return an array of Node objects", function() {
+      console.log(tree.nodes(0)[0].className);
+      expect(tree.nodes(0)[0].className).toBe('Node');
+
+    });
+  });
+
+  describe("openings and closings children nodes", function() {
 
 
-  //   it("starts with all root nodes colapsed", function() {
+    it("starts with all root nodes colapsed", function() {
+      expect(tree.nodes().length).toBe(11);
 
-  //     root1 = {name: 'node1', children: [{name:'node1.1', children: [{name:'node1.1.1'}, {name:'node1.1.2'}]}, {name:'node1.2'}]}
-  //     root2 = {name: 'node2', children: [{name:'node2.1'}, {name:'node2.2'}]}
-  //     root3 = {name: 'node3', children: [{name:'node3.1'}, {name:'node3.2'}]}
+      //roots      
+      [0,1,2].forEach(function(i){
+        expect(tree.nodes(0).eq(i).css('display')).toBe('block');
+      });
 
-  //     tree = new JQueryTree([root1, root2, root3]);
-  //     expect(tree.nodes().length).toBe(11);
-  //   });
+      //nodes level 1
+      [0,1,2,3,4,5].forEach(function(i){
+        expect(tree.nodes(1).eq(i).css('display')).toBe('none');
+      });
+
+      //nodes level 2
+      [0,1].forEach(function(i){
+        expect(tree.nodes(1).eq(i).css('display')).toBe('none');
+      });
+    });
+
+    // it("when a node is clicked, it toggle visibility of the straight children nodes", function() {
+    //   tree.nodes(0).eq(0).click();
+    //   tree.nodes(0).eq(0).click());
+
+    // });
 
 
-  // });
+
+  });
 });
