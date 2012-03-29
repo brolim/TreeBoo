@@ -45,9 +45,10 @@ describe("JQueryTree", function() {
 
   describe("data structure", function() {
     it("all methods to get nodes return an array of Node objects", function() {
-      console.log(tree.nodes(0)[0].className);
-      expect(tree.nodes(0)[0].className).toBe('Node');
-
+      expect(tree.all_nodes.length).toBe(11);
+      tree.all_nodes.forEach(function(node) {
+        expect(node instanceof Node).toBe(true);
+      });
     });
   });
 
@@ -82,4 +83,14 @@ describe("JQueryTree", function() {
 
 
   });
+});
+
+
+
+
+// ========================================================
+//      class Node documentation
+// ========================================================
+describe("Node", function() {
+  
 });

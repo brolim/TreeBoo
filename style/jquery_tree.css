@@ -1,7 +1,9 @@
-.root{
-  margin-left: 10px;
+.root, .node{
+  margin-left: 15px;  
 }
 
-.node{
-  margin-left: 10px;
+.marker{
+  padding-left: 10px;
+  margin-right: 5px;
+  border: 1px solid black;
 }
