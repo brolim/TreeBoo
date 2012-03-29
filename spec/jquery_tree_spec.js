@@ -12,18 +12,32 @@ describe("JQueryTree", function() {
       expect($(tree.el).text()).toBe('name1');
     });
 
-    it("renders four roots with their names and their divs", function() {
-      data = [{name: 'root0'}, 
-              {name: 'root1'}, 
-              {name: 'root2'}, 
-              {name: 'root3'}];
-      tree = new JQueryTree(data);
+    it("renders roots and children nodes", function() {
+      root1 = {name: 'node1', children: [{name:'node1.1', children: [{name:'node1.1.1'}, {name:'node1.1.2'}]}, 
+                                         {name:'node1.2'}]},
+      root2 = {name: 'node2', children: [{name:'node2.1'}, {name:'node2.2'}]}
+      root3 = {name: 'node3', children: [{name:'node3.1'}, {name:'node3.2'}]}
+      tree = new JQueryTree([root1, root2, root3]);
 
-      [0,1,2,3].forEach(function(i){
-        expect(tree.roots()[0].tagName).toBe('DIV');
-        expect(tree.roots()[0].className).toBe('root');
-        expect(tree.roots().eq(i).text()).toBe('root'+i);
-      });
+      expect(tree.roots().length).toBe(3);
+      expect(tree.nodes(0).length).toBe(3); // tree.roots() is the same
+      expect(tree.roots().eq(0).find('span:eq(0)').text()).toBe('node1');
+      expect(tree.roots().eq(1).find('span:eq(0)').text()).toBe('node2');
+      expect(tree.roots().eq(2).find('span:eq(0)').text()).toBe('node3');
+
+      expect(tree.nodes(1).length).toBe(6);
+      expect(tree.nodes(1).eq(0).find('span:eq(0)').text()).toBe('node1.1');
+      expect(tree.nodes(1).eq(1).find('span:eq(0)').text()).toBe('node1.2');
+      expect(tree.nodes(1).eq(2).find('span:eq(0)').text()).toBe('node2.1');
+      expect(tree.nodes(1).eq(3).find('span:eq(0)').text()).toBe('node2.2');
+      expect(tree.nodes(1).eq(4).find('span:eq(0)').text()).toBe('node3.1');
+      expect(tree.nodes(1).eq(5).find('span:eq(0)').text()).toBe('node3.2');
+
+      expect(tree.nodes(2).length).toBe(2);
+      expect(tree.nodes(2).eq(0).find('span:eq(0)').text()).toBe('node1.1.1');
+      expect(tree.nodes(2).eq(1).find('span:eq(0)').text()).toBe('node1.1.2');
+
+      expect(tree.nodes(3).length).toBe(0);
     });
 
     it("renders two level1 children with their names and divs", function() {
@@ -38,4 +52,19 @@ describe("JQueryTree", function() {
 
   });
 
+  // describe("openings and closings children nodes", function() {
+
+
+  //   it("starts with all root nodes colapsed", function() {
+
+  //     root1 = {name: 'node1', children: [{name:'node1.1', children: [{name:'node1.1.1'}, {name:'node1.1.2'}]}, {name:'node1.2'}]}
+  //     root2 = {name: 'node2', children: [{name:'node2.1'}, {name:'node2.2'}]}
+  //     root3 = {name: 'node3', children: [{name:'node3.1'}, {name:'node3.2'}]}
+
+  //     tree = new JQueryTree([root1, root2, root3]);
+  //     expect(tree.nodes().length).toBe(11);
+  //   });
+
+
+  // });
 });

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Visual Spec</title>
+  <script type="text/javascript" src="../lib/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="../src/jquery_tree.js"></script>
+  <link rel="stylesheet" type="text/css" href="../style/jquery_tree.css">
+</head>
+<body>
+  
+
+<script type="text/javascript">
+  $(function(){
+    root1 = {name: 'node1', children: [{name:'node1.1', children: [{name:'node1.1.1'}, {name:'node1.1.2'}]}, 
+                                       {name:'node1.2'}]},
+    root2 = {name: 'node2', children: [{name:'node2.1'}, {name:'node2.2'}]}
+    root3 = {name: 'node3', children: [{name:'node3.1'}, {name:'node3.2'}]}
+
+    tree = new JQueryTree([root1, root2, root3]);
+    $('body').append(tree.el);
+  });
+</script>
+
+</body>
+</html>
