@@ -5,7 +5,7 @@ describe("JQueryTree", function() {
                                        {name:'node1.2'}]},
     root2 = {name: 'node2', children: [{name:'node2.1'}, {name:'node2.2'}]}
     root3 = {name: 'node3', children: [{name:'node3.1'}, {name:'node3.2'}]}
-    tree = new JQueryTree([root1, root2, root3]);
+    tree = new Node([root1, root2, root3]);
   });
 
   describe("rendering", function() {
@@ -44,7 +44,7 @@ describe("JQueryTree", function() {
     it("renders two level1 children with their names and divs", function() {
       data = [{name: 'root0', children: [{name:'child0'},
                                          {name:'child1'}]}];
-      tree = new JQueryTree(data);
+      tree = new Node(data);
 
       expect(tree.nodes_as_jquery(1).length).toBe(2);
       expect(tree.nodes_as_jquery(1)[0].text().trim()).toBe('child0');
@@ -63,10 +63,10 @@ describe("JQueryTree", function() {
     it("all_nodes attr and nodes() method return an array of Node objects", function() {
       expect(tree.all_nodes.length).toBe(11);
       tree.all_nodes.forEach(function(node) {
-        expect(node instanceof Node).toBe(true);
+        expect(node instanceof NodeT).toBe(true);
       });
       tree.nodes(0).forEach(function(node) {
-        expect(node instanceof Node).toBe(true);
+        expect(node instanceof NodeT).toBe(true);
       });
     });
 
@@ -97,14 +97,14 @@ describe("JQueryTree", function() {
 // // ========================================================
 // //      class Node documentation
 // // ========================================================
-describe("Node", function() {
+describe("NodeT", function() {
 
   beforeEach(function () {
     root1 = {name: 'node1', children: [{name:'node1.1', children: [{name:'node1.1.1'}, {name:'node1.1.2'}]}, 
                                        {name:'node1.2'}]},
     root2 = {name: 'node2', children: [{name:'node2.1'}, {name:'node2.2'}]}
     root3 = {name: 'node3', children: [{name:'node3.1'}, {name:'node3.2'}]}
-    tree = new JQueryTree([root1, root2, root3]);
+    tree = new Node([root1, root2, root3]);
 
     node = tree.all_nodes[0];
     node_jquery = tree.nodes_as_jquery(0)[0];
@@ -118,10 +118,10 @@ describe("Node", function() {
       expect(node_jquery.find('div.children:eq(0)').css('display')).toBe('none');
     });
 
-    it("changes display in html when slide_toggle on node is called", function() {
-      node.slide_toggle();
-      expect(node_jquery.find('div.children:eq(0)').css('display')).toBe('block');
-    });
+    // it("changes display in html when slide_toggle on node is called", function() {
+    //   node.slide_toggle();
+    //   expect(node_jquery.find('div.children:eq(0)').css('display')).toBe('block');
+    // });
 
     // it("togles its html div.children visibility", function() {
     //   tree.nodes(0).eq(0).click();

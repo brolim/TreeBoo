@@ -4,8 +4,16 @@
 		"selected_items":
 		[
 			[
+				"div",
+				"div_id"
+			],
+			[
+				"sli",
+				"slide_toggle"
+			],
+			[
 				"jq",
-				"jquery_nodes"
+				"nodes_as_jquery"
 			],
 			[
 				"class",
@@ -14,10 +22,6 @@
 			[
 				"di",
 				"div"
-			],
-			[
-				"div",
-				"div_id"
 			],
 			[
 				"roo",
@@ -510,10 +514,6 @@
 			[
 				"w",
 				"wrapper_materias"
-			],
-			[
-				"reso",
-				"resource"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "src/jquery_tree.js",
 			"settings":
 			{
-				"buffer_size": 1466,
+				"buffer_size": 1762,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,7 +531,7 @@
 			"file": "spec/jquery_tree_spec.js",
 			"settings":
 			{
-				"buffer_size": 4667,
+				"buffer_size": 5113,
 				"line_ending": "Unix"
 			}
 		},
@@ -730,6 +730,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"jquery_nodes",
 			"className",
 			"console",
 			"jquery_nodes",
@@ -856,8 +857,7 @@
 			"revisar",
 			"questao._mate",
 			"<%=",
-			"notice",
-			"dash"
+			"notice"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -880,7 +880,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -888,43 +888,15 @@
 					"file": "src/jquery_tree.js",
 					"settings":
 					{
-						"buffer_size": 1466,
+						"buffer_size": 1762,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1341,
-								1341
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 306.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "spec/jquery_tree_spec.js",
-					"settings":
-					{
-						"buffer_size": 4667,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2573,
-								2573
+								242,
+								242
 							]
 						],
 						"settings":
@@ -935,6 +907,34 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "spec/jquery_tree_spec.js",
+					"settings":
+					{
+						"buffer_size": 5113,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4933,
+								4933
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1428.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -951,8 +951,8 @@
 						"selection":
 						[
 							[
-								276,
-								276
+								910,
+								910
 							]
 						],
 						"settings":
