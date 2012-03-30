@@ -8,10 +8,27 @@ _node_template = _.template("\n\
   </div>\n\
 </div>\n");
 
+_node_id = -1;
+level = 0
+
 Node = function(data_tree){
-  _node_id = -1;
-  this.all_nodes = [];
-  this.el = this._create_node_recursive(data_tree);
+  this.my_nodes = [];
+
+  self = this;
+  data_tree.forEach(function(raw_node){
+
+    self.el = _node_template({node_id:(++_node_id), name:raw_node.name})
+    var node_jquery = $('<p></p>').append(self.el);
+    
+    if(raw_node.children){
+      new_node = new Node(raw_node.children)
+      node_jquery.append($(new_node.el));
+      self.my_nodes.push(new_node)
+    }
+
+    self.node_html = node_jquery.html()
+
+  });
 };
 
 Node.prototype._create_node_recursive = function(data_tree, level) {
