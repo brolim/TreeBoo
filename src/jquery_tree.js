@@ -110,7 +110,7 @@ Node.prototype.unchecked_nodes = function() {
 };
   
 TreeBoo = function(raw_nodes) {
-  this.version = '0.1';
+  this.version = '0.1.0';
   this.nodes = []
   var self = this;
   raw_nodes.forEach(function(raw_node) {
