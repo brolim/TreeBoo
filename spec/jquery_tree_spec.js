@@ -158,6 +158,53 @@ describe("Node", function() {
           expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker unchecked')
         });
 
+        it("uncheck all nodes", function() {
+          raw_node = {name:'father'}
+          raw_node.children = [{name:'child'}];
+          node = new Node(raw_node);
+
+          //check our two nodes
+          node.el.find('span.marker:eq(0)').click();
+          node.el.find('span.marker:eq(1)').click();
+          expect(node.status).toBe('checked')
+          expect(node.children[0].status).toBe('checked')
+          expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker checked')
+          expect(node.el.find('.marker:eq(1)').attr('class')).toBe('marker checked')
+
+          node.uncheck_all_nodes();
+          expect(node.status).toBe('unchecked')
+          expect(node.children[0].status).toBe('unchecked')
+          expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker unchecked')
+          expect(node.el.find('.marker:eq(1)').attr('class')).toBe('marker unchecked')
+        });
+
+        it("toggle checkbox status", function() {
+          raw_node = {name:'father'}
+          raw_node.children = [{name:'child'}];
+          node = new Node(raw_node);
+
+          node.check_all_nodes();
+          expect(node.status).toBe('checked')
+          expect(node.children[0].status).toBe('checked')
+          expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker checked')
+          expect(node.el.find('.marker:eq(1)').attr('class')).toBe('marker checked')
+
+          node.uncheck_all_nodes();
+          expect(node.status).toBe('unchecked')
+          expect(node.children[0].status).toBe('unchecked')
+          expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker unchecked')
+          expect(node.el.find('.marker:eq(1)').attr('class')).toBe('marker unchecked')
+
+          node.check_all_nodes();
+          expect(node.status).toBe('checked')
+          expect(node.children[0].status).toBe('checked')
+          expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker checked')
+          expect(node.el.find('.marker:eq(1)').attr('class')).toBe('marker checked')
+        });
+
+
+
+
       });
 
     });

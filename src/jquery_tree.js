@@ -34,20 +34,40 @@ Node = function(me){
       children.slideToggle();
   });
   this.el.find('span.marker:eq(0)').click(function(){
-    
-    self.el.find('.marker:eq(0)').removeClass('unchecked');
-    self.el.find('.marker:eq(0)').removeClass('checked');
-    if(self.status=='checked'){
-      self.el.find('.marker:eq(0)').addClass('unchecked');
-      self.status = 'unchecked';
-    }
-    else {
-      self.el.find('.marker:eq(0)').addClass('checked');
-      self.status = 'checked';
-    }
-
+    if(self.status=='checked')
+      self.uncheck_node();
+    else
+      self.check_node();
   });
   
+};
+
+Node.prototype.uncheck_node = function() {
+  this.el.find('.marker:eq(0)').removeClass('unchecked');
+  this.el.find('.marker:eq(0)').removeClass('checked');
+  this.status = 'unchecked';
+  this.el.find('.marker:eq(0)').addClass('unchecked');
+};
+
+Node.prototype.check_node = function() {
+  this.el.find('.marker:eq(0)').removeClass('unchecked');
+  this.el.find('.marker:eq(0)').removeClass('checked');
+  this.status = 'checked';
+  this.el.find('.marker:eq(0)').addClass('checked');
+};
+
+Node.prototype.uncheck_all_nodes = function() {
+  this.uncheck_node();
+  this.children.forEach(function(node) {
+    node.uncheck_node()
+  });
+};
+
+Node.prototype.check_all_nodes = function() {
+  this.check_node();
+  this.children.forEach(function(node) {
+    node.check_node()
+  });
 };
 
 NodeArray = function(raw_nodes) {
