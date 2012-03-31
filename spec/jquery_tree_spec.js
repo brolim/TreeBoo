@@ -66,11 +66,11 @@ describe("Node", function() {
 
         it("node with no children", function() {
           node = new Node({name:'node1'});
-          expect(node.el.find('.marker').length).toBe(1); //marker
-          expect(node.el.find('.name').length).toBe(1); //name
-          expect(node.el.find('.name').text().trim()).toBe('node1'); //name
-          expect(node.el.find('.children').length).toBe(1); //name
-          expect(node.el.find('.children').css('display')).toBe('none'); //name
+          expect(node.el.find('.marker').length).toBe(1);
+          expect(node.el.find('.name').length).toBe(1);
+          expect(node.el.find('.name').text().trim()).toBe('node1');
+          expect(node.el.find('.children').length).toBe(1);
+          expect(node.el.find('.children').css('display')).toBe('none');
         });
 
         it("node with one child", function() {
@@ -78,19 +78,88 @@ describe("Node", function() {
           raw_node.children = [{name:'child'}];
           node = new Node(raw_node);
 
-          expect(node.el.find('.marker').length).toBe(2); //marker
-          expect(node.el.find('.name').length).toBe(2); //name
+          expect(node.el.find('.marker').length).toBe(2);
+          expect(node.el.find('.name').length).toBe(2);
           
-          expect(node.el.find('.name:eq(0)').text().trim()).toBe('father'); //name
-          expect(node.el.find('.children:eq(0)').length).toBe(1); //name
-          expect(node.el.find('.children:eq(0)').css('display')).toBe('none'); //name
+          expect(node.el.find('.name:eq(0)').text().trim()).toBe('father');
+          expect(node.el.find('.children:eq(0)').length).toBe(1);
+          expect(node.el.find('.children:eq(0)').css('display')).toBe('none');
 
-          expect(node.el.find('.name:eq(1)').text().trim()).toBe('child'); //name
-          expect(node.el.find('.children:eq(1)').length).toBe(1); //name
-          expect(node.el.find('.children:eq(1)').css('display')).toBe('none'); //name
+          expect(node.el.find('.name:eq(1)').text().trim()).toBe('child');
+          expect(node.el.find('.children:eq(1)').length).toBe(1);
+          expect(node.el.find('.children:eq(1)').css('display')).toBe('none');
         });
 
       });
+
+      describe("opening and closing node", function() {
+
+        it("shows and hides children when span.name is clicked", function() {
+          raw_node = {name:'father'}
+          raw_node.children = [{name:'child'}];
+          node = new Node(raw_node);
+
+          expect(node.el.find('.children:eq(0)').css('display')).toBe('none');
+          node.el.find('span.name:eq(0)').click();
+          expect(node.el.find('.children:eq(0)').css('display')).toBe('block');
+          node.el.find('span.name:eq(0)').click();
+          expect(node.el.find('.children:eq(0)').css('display')).toBe('none ');
+        });
+
+      });
+
+      describe("node checkbox", function() {
+
+        it("starts with status as 'unchecked'", function() {
+          raw_node = {name:'father'}
+          raw_node.children = [{name:'child'}];
+          node = new Node(raw_node);
+          expect(node.status).toBe('unchecked')
+        });
+
+        it("maker element starts with class 'unchecked'", function() {
+          raw_node = {name:'father'}
+          raw_node.children = [{name:'child'}];
+          node = new Node(raw_node);
+          expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker unchecked')
+        });
+
+        it("toggle status between 'unchecked' and 'checked' when span.marker is clicked", function() {
+          raw_node = {name:'father'}
+          node = new Node(raw_node);
+          
+          expect(node.status).toBe('unchecked');
+          node.el.find('span.marker:eq(0)').click();
+          expect(node.status).toBe('checked');
+          node.el.find('span.marker:eq(0)').click();
+          expect(node.status).toBe('unchecked');
+        });
+
+        it("toggle status between 'unchecked' and 'checked' when span.marker is clicked", function() {
+          raw_node = {name:'father'}
+          node = new Node(raw_node);
+          
+          expect(node.status).toBe('unchecked');
+          node.el.find('span.marker:eq(0)').click();
+          expect(node.status).toBe('checked');
+          node.el.find('span.marker:eq(0)').click();
+          expect(node.status).toBe('unchecked');
+        });
+
+        it("toggles maker element class between 'unchecked' and 'checked'", function() {
+          raw_node = {name:'father'}
+          raw_node.children = [{name:'child'}];
+          node = new Node(raw_node);
+
+          expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker unchecked')
+          node.el.find('span.marker:eq(0)').click();
+          expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker checked')
+          node.el.find('span.marker:eq(0)').click();
+          expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker unchecked')
+        });
+
+      });
+
     });
 
   });

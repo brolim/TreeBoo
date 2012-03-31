@@ -1,4 +1,4 @@
-.root, .node{
+.node{
   margin-left: 15px;  
 }
 
@@ -6,4 +6,16 @@
   padding-left: 10px;
   margin-right: 5px;
   border: 1px solid black;
+}
+
+.checked{
+  background-color: blue;
+}
+
+.unchecked{
+  background-color: white;
+}
+
+.name{
+  cursor: pointer;
 }
