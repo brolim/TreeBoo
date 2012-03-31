@@ -82,13 +82,15 @@ describe("Node", function() {
           expect(node.el.find('.children').css('display')).toBe('none');
         });
 
-        it("node with one child", function() {
-          raw_node = {name:'father'}
-          raw_node.children = [{name:'child'}];
-          node = new Node(raw_node);
+        it("node with one child and two grand_children", function() {
+          var father = {name:'father'};
+          var child = {name:'child'};
+          child.children = [{name:'grand_child1'}, {name:'grand_child2'}];
+          father.children = [child];
+          var node = new Node(father);
 
-          expect(node.el.find('.marker').length).toBe(2);
-          expect(node.el.find('.name').length).toBe(2);
+          expect(node.el.find('.marker').length).toBe(4);
+          expect(node.el.find('.name').length).toBe(4);
           
           expect(node.el.find('.name:eq(0)').text().trim()).toBe('father');
           expect(node.el.find('.children:eq(0)').length).toBe(1);
@@ -97,6 +99,16 @@ describe("Node", function() {
           expect(node.el.find('.name:eq(1)').text().trim()).toBe('child');
           expect(node.el.find('.children:eq(1)').length).toBe(1);
           expect(node.el.find('.children:eq(1)').css('display')).toBe('none');
+
+          expect(node.el.find('.name:eq(2)').text().trim()).toBe('grand_child1');
+          expect(node.el.find('.children:eq(2)').length).toBe(1);
+          expect(node.el.find('.children:eq(2)').css('display')).toBe('none');
+
+          expect(node.el.find('.name:eq(3)').text().trim()).toBe('grand_child2');
+          expect(node.el.find('.children:eq(3)').length).toBe(1);
+          expect(node.el.find('.children:eq(3)').css('display')).toBe('none');
+
+          console.log(node.el);
         });
 
       });

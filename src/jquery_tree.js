@@ -24,16 +24,15 @@ Node = function(me){
     me.children.forEach(function(raw_child) {
       var new_node = new Node(raw_child);
       self.children.push(new_node);
-      self.el.find('.children:eq(0)').html(new_node.el);
+      self.el.find('.children:eq(0)').append(new_node.el);
     });
   }
 
-  //binding clicks
   this.el.find('span.name:eq(0)').click(function(){
     var children = self.el.find('.children:eq(0)');
-    if(children.length>0)
-      children.slideToggle();
+    children.slideToggle();
   });
+
   this.el.find('span.marker:eq(0)').click(function(){
     if(self.status=='checked')
       self.uncheck_node();
@@ -111,6 +110,7 @@ Node.prototype.unchecked_nodes = function() {
 };
   
 TreeBoo = function(raw_nodes) {
+  this.version = '0.1';
   this.nodes = []
   var self = this;
   raw_nodes.forEach(function(raw_node) {

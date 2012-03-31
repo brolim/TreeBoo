@@ -13,12 +13,21 @@
 
 <script type="text/javascript">
   $(function(){
-    root1 = {name: 'node1', children: [{name:'node1.1', children: [{name:'node1.1.1'}, {name:'node1.1.2'}]}, 
-                                       {name:'node1.2'}]},
-    root2 = {name: 'node2', children: [{name:'node2.1'}, {name:'node2.2'}]}
-    root3 = {name: 'node3', children: [{name:'node3.1'}, {name:'node3.2'}]}
+    var node111 = {name:'node1.1.1'};
+    var node112 = {name:'node1.1.2'};
+    var node11 = {name:'node1.1', children: [node111, node112]};
+    var node12 = {name:'node1.2'};
+    var node1 = {name: 'node1', children: [node11, node12]};
 
-    tree = new TreeBoo([root1, root2, root3]);
+    var node21 = {name:'node2.1'};
+    var node22 = {name:'node2.2'};
+    var node2 = {name: 'node2', children: [node21, node22]};
+    
+    var node31 = {name:'node3.1'};
+    var node32 = {name:'node3.2'};
+    var node3 = {name: 'node3', children: [node31, node32]};
+
+    tree = new TreeBoo([node1, node2, node3]);
     $('body').append(tree.html);
   });
 </script>
