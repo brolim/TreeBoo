@@ -239,7 +239,80 @@ describe("Node", function() {
     expect(node.node('2').name).toBe('node2');
     expect(node.node('3').name).toBe('node3');
     expect(node.node('4').name).toBe('node4');
+  });
 
+  it("gets checked nodes", function() {
+    raw_node = {id:'1', name:'node1'}
+    raw_node.children = [];
+    raw_node.children.push({id:'2', name:'node2'});
+    raw_node.children.push({id:'3', name:'node3'});
+    raw_node.children.push({id:'4', name:'node4'});
+
+    var node1 = new Node(raw_node);
+    var node2 = node1.children[0];
+    var node3 = node1.children[1];
+    var node4 = node1.children[2];
+
+    expect(node1.checked_nodes().length).toBe(0);
+
+    node1.check_node();
+    expect(node1.checked_nodes().length).toBe(1);
+    expect(node1.checked_nodes()[0]).toBe(node1);
+
+    node2.check_node();
+    expect(node1.checked_nodes().length).toBe(2);
+    expect(node1.checked_nodes()[0]).toBe(node1);
+    expect(node1.checked_nodes()[1]).toBe(node2);
+
+    node3.check_node();
+    expect(node1.checked_nodes().length).toBe(3);
+    expect(node1.checked_nodes()[0]).toBe(node1);
+    expect(node1.checked_nodes()[1]).toBe(node2);
+    expect(node1.checked_nodes()[2]).toBe(node3);
+
+    node4.check_node();
+    expect(node1.checked_nodes().length).toBe(4);
+    expect(node1.checked_nodes()[0]).toBe(node1);
+    expect(node1.checked_nodes()[1]).toBe(node2);
+    expect(node1.checked_nodes()[2]).toBe(node3);
+    expect(node1.checked_nodes()[3]).toBe(node4);
+  });
+
+  it("gets unchecked nodes", function() {
+    raw_node = {id:'1', name:'node1'}
+    raw_node.children = [];
+    raw_node.children.push({id:'2', name:'node2'});
+    raw_node.children.push({id:'3', name:'node3'});
+    raw_node.children.push({id:'4', name:'node4'});
+
+    var node1 = new Node(raw_node);
+    var node2 = node1.children[0];
+    var node3 = node1.children[1];
+    var node4 = node1.children[2];
+
+    expect(node1.unchecked_nodes().length).toBe(4);
+    expect(node1.unchecked_nodes()[0]).toBe(node1);
+    expect(node1.unchecked_nodes()[1]).toBe(node2);
+    expect(node1.unchecked_nodes()[2]).toBe(node3);
+    expect(node1.unchecked_nodes()[3]).toBe(node4);
+
+    node1.check_node();
+    expect(node1.unchecked_nodes().length).toBe(3);
+    expect(node1.unchecked_nodes()[0]).toBe(node2);
+    expect(node1.unchecked_nodes()[1]).toBe(node3);
+    expect(node1.unchecked_nodes()[2]).toBe(node4);
+
+    node2.check_node();
+    expect(node1.unchecked_nodes().length).toBe(2);
+    expect(node1.unchecked_nodes()[0]).toBe(node3);
+    expect(node1.unchecked_nodes()[1]).toBe(node4);
+
+    node3.check_node();
+    expect(node1.unchecked_nodes().length).toBe(1);
+    expect(node1.unchecked_nodes()[0]).toBe(node4);
+
+    node4.check_node();
+    expect(node1.unchecked_nodes().length).toBe(0);
   });
 });
 

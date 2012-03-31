@@ -87,6 +87,29 @@ Node.prototype.check_all_nodes = function() {
   });
 };
 
+Node.prototype._nodes_by_status = function(status) {
+  var nodes = []
+  if(this.status == status){
+    nodes.push(this);
+  }
+
+  this.children.forEach(function(node) {
+    if(node.status == status){
+      nodes.push(node);
+    }
+  });
+
+  return nodes;
+};
+
+Node.prototype.checked_nodes = function() {
+  return this._nodes_by_status('checked');
+};
+
+Node.prototype.unchecked_nodes = function() {
+  return this._nodes_by_status('unchecked');
+};
+  
 TreeBoo = function(raw_nodes) {
   this.nodes = []
   var self = this;
