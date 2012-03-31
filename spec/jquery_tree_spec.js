@@ -5,8 +5,9 @@ describe("Node", function() {
     describe("object creation", function() {
 
       it("creates a simple node with some html", function() {
-        node = new Node({name:'node1'});
+        node = new Node({id:'my_id', name:'node1'});
 
+        expect(node.id).toBe('my_id');
         expect(node.name).toBe('node1');
         expect(node.children.length).toBe(0);
         expect(node.el).toNotBe(undefined);

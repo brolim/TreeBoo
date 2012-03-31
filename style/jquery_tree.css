@@ -3,17 +3,17 @@
 }
 
 .marker{
-  padding-left: 10px;
+  padding-left: 18px;
   margin-right: 5px;
-  border: 1px solid black;
+  background: url('../imgs/bg.png');
 }
 
 .checked{
-  background-color: blue;
+  background-position: -36px 54px;
 }
 
 .unchecked{
-  background-color: white;
+  background-position: 0px 54px;
 }
 
 .name{
