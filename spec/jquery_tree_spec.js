@@ -1,134 +1,133 @@
-describe("JQueryTree", function() {
+describe("Node", function() {
 
-  beforeEach(function () {
-    root1 = {name: 'node1', children: [{name:'node1.1', children: [{name:'node1.1.1'}, {name:'node1.1.2'}]}, 
-                                       {name:'node1.2'}]},
-    root2 = {name: 'node2', children: [{name:'node2.1'}, {name:'node2.2'}]}
-    root3 = {name: 'node3', children: [{name:'node3.1'}, {name:'node3.2'}]}
-    tree = new Node([root1, root2, root3]);
-  });
-
-  describe("rendering", function() {
+  describe("initializing tree", function() {
     
-    it("renders roots and children nodes", function() {
-      html = $('<p></p>').append(tree.el);
+    describe("object creation", function() {
 
-      roots = tree.nodes(0); 
-      expect(roots.length).toBe(3);
-      expect( (html.find('#'+roots[0].div_id)).find('.name:eq(0)').text().trim()).toBe('node1');
-      expect( (html.find('#'+roots[1].div_id)).find('.name:eq(0)').text().trim()).toBe('node2');
-      expect( (html.find('#'+roots[2].div_id)).find('.name:eq(0)').text().trim()).toBe('node3');
+      it("creates a simple node with some html", function() {
+        node = new Node({name:'node1'});
 
-      level1_nodes = tree.nodes(1); 
-      expect(level1_nodes.length).toBe(6);
-      expect( (html.find('#'+level1_nodes[0].div_id)).find('.name:eq(0)').text().trim()).toBe('node1.1');
-      expect( (html.find('#'+level1_nodes[1].div_id)).find('.name:eq(0)').text().trim()).toBe('node1.2');
-      expect( (html.find('#'+level1_nodes[2].div_id)).find('.name:eq(0)').text().trim()).toBe('node2.1');
-      expect( (html.find('#'+level1_nodes[3].div_id)).find('.name:eq(0)').text().trim()).toBe('node2.2');
-      expect( (html.find('#'+level1_nodes[4].div_id)).find('.name:eq(0)').text().trim()).toBe('node3.1');
-      expect( (html.find('#'+level1_nodes[5].div_id)).find('.name:eq(0)').text().trim()).toBe('node3.2');
+        expect(node.name).toBe('node1');
+        expect(node.children.length).toBe(0);
+        expect(node.el).toNotBe(undefined);
+      });
 
-      level2_nodes = tree.nodes(2); 
-      expect(level2_nodes.length).toBe(2);
-      expect( (html.find('#'+level2_nodes[0].div_id)).find('.name:eq(0)').text().trim()).toBe('node1.1.1');
-      expect( (html.find('#'+level2_nodes[1].div_id)).find('.name:eq(0)').text().trim()).toBe('node1.1.2');
+      it("creates a node with one child", function() {
+        data = {name:'father'};
+        data.children = [{name:'child1'}]
+        node = new Node(data);
 
-      level3_nodes = tree.nodes(3); 
-      expect(level3_nodes.length).toBe(0);
+        expect(node.name).toBe('father');
+        expect(node instanceof Node).toBe(true);
+
+        var children = node.children;
+        expect(children.length).toBe(1);
+        expect(children[0].name).toBe('child1');
+        expect(children[0].children.length).toBe(0);
+        expect(children[0] instanceof Node).toBe(true);
+      });
+
+      it("creates a node with two children", function() {
+        data = {name:'father'};
+        data.children = [{name:'child1'}, {name:'child2'}]
+        node = new Node(data);
+
+        expect(node.name).toBe('father');
+        expect(node instanceof Node).toBe(true);
+
+        var children = node.children;
+        expect(children.length).toBe(2);
+
+        expect(children[0].name).toBe('child1');
+        expect(children[0].children.length).toBe(0);
+        expect(children[0] instanceof Node).toBe(true);
+
+        expect(children[1].name).toBe('child1');
+        expect(children[1].children.length).toBe(0);
+        expect(children[1] instanceof Node).toBe(true);
+      });
+
+      it("sets the object passed inside me propertie", function() {
+        data = {name:'name', attr1:'attr1', attr2:'attr2', attr3:'attr3', attr4:'attr4', attr5:'attr5'};
+        node = new Node(data);
+        expect(node.me.name).toBe('name');
+        expect(node.me.attr1).toBe('attr1');
+        expect(node.me.attr2).toBe('attr2');
+        expect(node.me.attr3).toBe('attr3');
+        expect(node.me.attr4).toBe('attr4');
+        expect(node.me.attr5).toBe('attr5');
+      });
+
+    });
+    
+    describe("html creation", function() {
+
+      describe("html creation inside root node", function() {
+
+        it("node with no children", function() {
+          node = new Node({name:'node1'});
+          expect(node.el.find('.marker').length).toBe(1); //marker
+          expect(node.el.find('.name').length).toBe(1); //name
+          expect(node.el.find('.name').text().trim()).toBe('node1'); //name
+          expect(node.el.find('.children').length).toBe(1); //name
+          expect(node.el.find('.children').css('display')).toBe('none'); //name
+        });
+
+        it("node with one child", function() {
+          raw_node = {name:'father'}
+          raw_node.children = [{name:'child'}];
+          node = new Node(raw_node);
+
+          expect(node.el.find('.marker').length).toBe(2); //marker
+          expect(node.el.find('.name').length).toBe(2); //name
+          
+          expect(node.el.find('.name:eq(0)').text().trim()).toBe('father'); //name
+          expect(node.el.find('.children:eq(0)').length).toBe(1); //name
+          expect(node.el.find('.children:eq(0)').css('display')).toBe('none'); //name
+
+          expect(node.el.find('.name:eq(1)').text().trim()).toBe('child'); //name
+          expect(node.el.find('.children:eq(1)').length).toBe(1); //name
+          expect(node.el.find('.children:eq(1)').css('display')).toBe('none'); //name
+        });
+
+      });
     });
 
-    // it("renders all nodes with class node", function() {
-    //   expect($('<p></p>').append(tree.el).find('.node').length).toBe(11);
-    // });    
+  });
 
-    // it("renders two level1 children with their names and divs", function() {
-    //   data = [{name: 'root0', children: [{name:'child0'},
-    //                                      {name:'child1'}]}];
-    //   tree = new Node(data);
+});
 
-    //   expect(tree.nodes_as_jquery(1).length).toBe(2);
-    //   expect(tree.nodes_as_jquery(1)[0].text().trim()).toBe('child0');
-    //   expect(tree.nodes_as_jquery(1)[1].text().trim()).toBe('child1');
-    // });
 
-    // it("renders span.markers for all nodes", function() {
-    //   tree.nodes_as_jquery().forEach(function(node) {
-    //     expect(node.find('.marker:eq(0)').length).toBe(1);
-    //   });
-    // });
+describe("NodeArray", function() {
+
+  describe("object creation", function() {
+
+    it("creates one Node", function() {
+      node_array = new NodeArray([{name:'name'}]);
+      expect(node_array.nodes.length).toBe(1);
+      expect(node_array.nodes[0] instanceof Node).toBe(true);
+    });
+
+    it("creates three Node", function() {
+      node_array = new NodeArray([{name:'name1'}, {name:'name2'}, {name:'name3'}]);
+      expect(node_array.nodes.length).toBe(3);
+      expect(node_array.nodes[0] instanceof Node).toBe(true);
+      expect(node_array.nodes[1] instanceof Node).toBe(true);
+      expect(node_array.nodes[2] instanceof Node).toBe(true);
+    });
 
   });
 
-//   describe("data structure", function() {
-//     it("all_nodes attr and nodes() method return an array of Node objects", function() {
-//       expect(tree.all_nodes.length).toBe(11);
-//       tree.all_nodes.forEach(function(node) {
-//         expect(node instanceof NodeT).toBe(true);
-//       });
-//       tree.nodes(0).forEach(function(node) {
-//         expect(node instanceof NodeT).toBe(true);
-//       });
-//     });
+  describe("html creation", function() {
 
-//     it("has same id of html element", function() {
-//       root0 = tree.nodes_as_jquery(0)[0];
-//       node0 = tree.nodes(0)[0];
-//       expect(node0.div_id).toBe(root0.attr('id'));
-//     });
+    it("creates correct html for two nodes", function() {
+      node_array = new NodeArray([{name:'name1'}, {name:'name2'}]);
 
-//   });
+      expect(node_array.html.find('.node').length).toBe(2);
+      expect(node_array.html.find('.node:eq(0)').find('.name:eq(0)').text().trim()).toBe('name1');
+      expect(node_array.html.find('.node:eq(1)').find('.name:eq(0)').text().trim()).toBe('name2');
+    });
 
-//   describe("openings and closings children nodes", function() {
+  });
 
-
-//     it("starts with all root nodes colapsed", function() {
-//       expect(tree.nodes().length).toBe(11);
-
-//       //roots      
-//       tree.nodes_as_jquery(0).forEach(function(node){
-//         expect(node.css('display')).toBe('block');
-//         expect(node.find('.children:eq(0)').css('display')).toBe('none');
-//       });
-//     });
-
-//   });
-// });
-
-// // // ========================================================
-// // //      class Node documentation
-// // // ========================================================
-// describe("NodeT", function() {
-
-//   beforeEach(function () {
-//     root1 = {name: 'node1', children: [{name:'node1.1', children: [{name:'node1.1.1'}, {name:'node1.1.2'}]}, 
-//                                        {name:'node1.2'}]},
-//     root2 = {name: 'node2', children: [{name:'node2.1'}, {name:'node2.2'}]}
-//     root3 = {name: 'node3', children: [{name:'node3.1'}, {name:'node3.2'}]}
-//     tree = new Node([root1, root2, root3]);
-
-//     node = tree.all_nodes[0];
-//     node_jquery = tree.nodes_as_jquery(0)[0];
-//     expect(node.div_id).toBe(node_jquery.attr('id'));
-
-//   });
-
-//   describe("slide div.children down and up", function() {
-
-//     it("starts with div.children hidden", function() {
-//       expect(node_jquery.find('div.children:eq(0)').css('display')).toBe('none');
-//     });
-
-//     // it("changes display in html when slide_toggle on node is called", function() {
-//     //   node.slide_toggle();
-//     //   expect(node_jquery.find('div.children:eq(0)').css('display')).toBe('block');
-//     // });
-
-//     // it("togles its html div.children visibility", function() {
-//     //   tree.nodes(0).eq(0).click();
-//     //   tree.nodes(0).eq(0).click();
-
-//     // });
-
-//   });
-  
 });

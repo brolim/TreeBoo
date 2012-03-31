@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"mar",
+				"marker"
+			],
+			[
+				"node",
+				"node_jquery"
+			],
+			[
+				"new",
+				"new_node"
+			],
+			[
 				"div",
 				"div_id"
 			],
@@ -34,10 +46,6 @@
 			[
 				"all",
 				"all_nodes"
-			],
-			[
-				"node",
-				"node_id"
 			],
 			[
 				"node_",
@@ -158,10 +166,6 @@
 			[
 				"te",
 				"texto_da_questao"
-			],
-			[
-				"mar",
-				"margin-left"
 			],
 			[
 				"top",
@@ -510,10 +514,6 @@
 			[
 				"fo",
 				"forEach"
-			],
-			[
-				"w",
-				"wrapper_materias"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "src/jquery_tree.js",
 			"settings":
 			{
-				"buffer_size": 1762,
+				"buffer_size": 2044,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,7 +531,7 @@
 			"file": "spec/jquery_tree_spec.js",
 			"settings":
 			{
-				"buffer_size": 5113,
+				"buffer_size": 6335,
 				"line_ending": "Unix"
 			}
 		},
@@ -730,6 +730,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"my_nodes",
+			"all_nodes",
 			"jquery_nodes",
 			"className",
 			"console",
@@ -855,9 +857,7 @@
 			"_materias",
 			"topicos_assunto1",
 			"revisar",
-			"questao._mate",
-			"<%=",
-			"notice"
+			"questao._mate"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -888,15 +888,15 @@
 					"file": "src/jquery_tree.js",
 					"settings":
 					{
-						"buffer_size": 1762,
+						"buffer_size": 2044,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								242,
-								242
+								426,
+								426
 							]
 						],
 						"settings":
@@ -916,15 +916,15 @@
 					"file": "spec/jquery_tree_spec.js",
 					"settings":
 					{
-						"buffer_size": 5113,
+						"buffer_size": 6335,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4933,
-								4933
+								1359,
+								1359
 							]
 						],
 						"settings":
@@ -934,7 +934,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1428.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
