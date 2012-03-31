@@ -13,19 +13,25 @@ describe("Node", function() {
         expect(node.el).toNotBe(undefined);
       });
 
-      it("creates a node with one child", function() {
-        data = {name:'father'};
-        data.children = [{name:'child1'}]
-        node = new Node(data);
+      it("creates a node with one child and one grand_child", function() {
+        var father = {name:'father'};
+        var child = {name:'child'};
+        child.children = [{name:'grand_child'}];
+        father.children = [child];
+        var node = new Node(father);
 
         expect(node.name).toBe('father');
         expect(node instanceof Node).toBe(true);
 
-        var children = node.children;
-        expect(children.length).toBe(1);
-        expect(children[0].name).toBe('child1');
-        expect(children[0].children.length).toBe(0);
-        expect(children[0] instanceof Node).toBe(true);
+        expect(node.children.length).toBe(1);
+        expect(node.children[0].name).toBe('child');
+        expect(node.children[0].children.length).toBe(1);
+        expect(node.children[0] instanceof Node).toBe(true);
+
+        expect(node.children[0].children.length).toBe(1);
+        expect(node.children[0].children[0].name).toBe('grand_child');
+        expect(node.children[0].children[0].children.length).toBe(0);
+        expect(node.children[0].children[0] instanceof Node).toBe(true);
       });
 
       it("creates a node with two children", function() {
