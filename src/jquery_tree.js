@@ -1,5 +1,5 @@
 _node_template = _.template("\n\
-<div id='jqt<%= node_id %>' class='node' style='display:block'>\n\
+<div id='<%= node_id %>' class='node' style='display:block'>\n\
   <span class='marker unchecked'></span>\n\
   <span class='name'>\n\
     <%= name %>\n\
@@ -8,14 +8,13 @@ _node_template = _.template("\n\
   </div>\n\
 </div>\n");
 
-_node_id = -1;
 level = 0
 
 Node = function(me){
   this.name = me.name;
   this.me = me;
   this.status = 'unchecked';
-  this.el = $(_node_template({node_id:(++_node_id), name:me.name}));
+  this.el = $(_node_template({node_id:(me.id), name:me.name}));
 
   var self = this;
 

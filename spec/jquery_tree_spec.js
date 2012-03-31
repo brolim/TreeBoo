@@ -65,7 +65,9 @@ describe("Node", function() {
       describe("html creation inside root node", function() {
 
         it("node with no children", function() {
-          node = new Node({name:'node1'});
+          node = new Node({id:'my_id', name:'node1'});
+
+          expect(node.el.attr('id')).toBe('my_id');
           expect(node.el.find('.marker').length).toBe(1);
           expect(node.el.find('.name').length).toBe(1);
           expect(node.el.find('.name').text().trim()).toBe('node1');
@@ -202,15 +204,26 @@ describe("Node", function() {
           expect(node.el.find('.marker:eq(1)').attr('class')).toBe('marker checked')
         });
 
-
-
-
       });
 
     });
 
   });
 
+  describe("child node changing affecting parents", function() {
+    it("changes its child status when someone else change it by reference", function() {
+      raw_node = {name:'father'}
+      raw_node.children = [{name:'child'}];
+      father = new Node(raw_node);
+      child = father.children[0];
+
+      child.check_node();
+      expect(child.status).toBe('checked')
+      expect(child.el.find('.marker:eq(0)').attr('class')).toBe('marker checked')
+      expect(father.children[0].status).toBe('checked')
+      expect(father.children[0].el.find('.marker:eq(0)').attr('class')).toBe('marker checked')
+    });
+  });
 });
 
 
