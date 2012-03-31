@@ -43,7 +43,7 @@ describe("Node", function() {
         expect(children[0].children.length).toBe(0);
         expect(children[0] instanceof Node).toBe(true);
 
-        expect(children[1].name).toBe('child1');
+        expect(children[1].name).toBe('child2');
         expect(children[1].children.length).toBe(0);
         expect(children[1] instanceof Node).toBe(true);
       });
@@ -225,21 +225,37 @@ describe("Node", function() {
       expect(father.children[0].el.find('.marker:eq(0)').attr('class')).toBe('marker checked')
     });
   });
+
+  it("gets node by id", function() {
+    raw_node = {id:'1', name:'node1'}
+    raw_node.children = [];
+    raw_node.children.push({id:'2', name:'node2'});
+    raw_node.children.push({id:'3', name:'node3'});
+    raw_node.children.push({id:'4', name:'node4'});
+    var node = new Node(raw_node);
+
+    expect(node.id).toBe('1');
+    expect(node.node('1').name).toBe('node1');
+    expect(node.node('2').name).toBe('node2');
+    expect(node.node('3').name).toBe('node3');
+    expect(node.node('4').name).toBe('node4');
+
+  });
 });
 
 
-describe("NodeArray", function() {
+describe("TreeBoo", function() {
 
   describe("object creation", function() {
 
     it("creates one Node", function() {
-      node_array = new NodeArray([{name:'name'}]);
+      node_array = new TreeBoo([{name:'name'}]);
       expect(node_array.nodes.length).toBe(1);
       expect(node_array.nodes[0] instanceof Node).toBe(true);
     });
 
     it("creates three Node", function() {
-      node_array = new NodeArray([{name:'name1'}, {name:'name2'}, {name:'name3'}]);
+      node_array = new TreeBoo([{name:'name1'}, {name:'name2'}, {name:'name3'}]);
       expect(node_array.nodes.length).toBe(3);
       expect(node_array.nodes[0] instanceof Node).toBe(true);
       expect(node_array.nodes[1] instanceof Node).toBe(true);
@@ -251,7 +267,7 @@ describe("NodeArray", function() {
   describe("html creation", function() {
 
     it("creates correct html for two nodes", function() {
-      node_array = new NodeArray([{name:'name1'}, {name:'name2'}]);
+      node_array = new TreeBoo([{name:'name1'}, {name:'name2'}]);
 
       expect(node_array.html.find('.node').length).toBe(2);
       expect(node_array.html.find('.node:eq(0)').find('.name:eq(0)').text().trim()).toBe('name1');

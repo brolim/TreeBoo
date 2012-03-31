@@ -12,6 +12,7 @@ level = 0
 
 Node = function(me){
   this.name = me.name;
+  this.id = me.id;
   this.me = me;
   this.status = 'unchecked';
   this.el = $(_node_template({node_id:(me.id), name:me.name}));
@@ -21,12 +22,13 @@ Node = function(me){
   this.children = [];
   if(me.children){
     me.children.forEach(function(raw_child) {
-      var new_node = new Node(me.children[0])
+      var new_node = new Node(raw_child);
       self.children.push(new_node);
       self.el.find('.children:eq(0)').html(new_node.el);
     });
   }
 
+  //binding clicks
   this.el.find('span.name:eq(0)').click(function(){
     var children = self.el.find('.children:eq(0)');
     if(children.length>0)
@@ -39,6 +41,22 @@ Node = function(me){
       self.check_node();
   });
   
+};
+
+Node.prototype.node = function(node_id) {
+  if(node_id==this.id){
+    return this;
+  }
+  else{
+    var node_to_return = 'aaa';
+    this.children.forEach(function(node) {
+      if(node.id==node_id){
+        node_to_return = node;
+      }
+      return true;//continue
+    });
+    return node_to_return;
+  }
 };
 
 Node.prototype.uncheck_node = function() {
@@ -69,7 +87,7 @@ Node.prototype.check_all_nodes = function() {
   });
 };
 
-NodeArray = function(raw_nodes) {
+TreeBoo = function(raw_nodes) {
   this.nodes = []
   var self = this;
   raw_nodes.forEach(function(raw_node) {
