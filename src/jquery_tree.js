@@ -1,5 +1,5 @@
 _node_template = _.template("\n\
-<div id='<%= node_id %>' class='node' style='display:block'>\n\
+<div id='<%= node_id %>' class='node level<%= level %>' _node_level='<%= level %>' style='display:block'>\n\
   <span class='marker unchecked'></span>\n\
   <span class='name'>\n\
     <%= name %>\n\
@@ -8,21 +8,21 @@ _node_template = _.template("\n\
   </div>\n\
 </div>\n");
 
-level = 0
 
-Node = function(me){
+Node = function(me, level){
   this.name = me.name;
   this.id = me.id;
   this.me = me;
   this.status = 'unchecked';
-  this.el = $(_node_template({node_id:(me.id), name:me.name}));
+  this.level = (level==undefined) ? 0 : level;
+  this.el = $(_node_template({node_id:(me.id), name:me.name, level:this.level}));
 
   var self = this;
 
   this.children = [];
   if(me.children){
     me.children.forEach(function(raw_child) {
-      var new_node = new Node(raw_child);
+      var new_node = new Node(raw_child, self.level+1);
       self.children.push(new_node);
       self.el.find('.children:eq(0)').append(new_node.el);
     });
@@ -75,14 +75,14 @@ Node.prototype.check_node = function() {
 Node.prototype.uncheck_all_nodes = function() {
   this.uncheck_node();
   this.children.forEach(function(node) {
-    node.uncheck_node()
+    node.uncheck_node();
   });
 };
 
 Node.prototype.check_all_nodes = function() {
   this.check_node();
   this.children.forEach(function(node) {
-    node.check_node()
+    node.check_node();
   });
 };
 

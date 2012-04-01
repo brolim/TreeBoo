@@ -5,7 +5,7 @@ describe("Node", function() {
     describe("object creation", function() {
 
       it("creates a simple node with some html", function() {
-        node = new Node({id:'my_id', name:'node1'});
+        var node = new Node({id:'my_id', name:'node1'});
 
         expect(node.id).toBe('my_id');
         expect(node.name).toBe('node1');
@@ -34,10 +34,35 @@ describe("Node", function() {
         expect(node.children[0].children[0] instanceof Node).toBe(true);
       });
 
+      it("identifies node level in level attribute for every node", function() {
+        var father = {id:'father', name:'father'};
+        var child = {id:'child', name:'child'};
+        var grand_child = {id:'grand_child', name:'grand_child'};
+
+        child.children = [grand_child];
+        father.children = [child];
+
+        father = new Node(father);
+        child = father.children[0];
+        grand_child = child.children[0];
+
+        expect(father.name).toBe('father');
+        expect(father.level).toBe(0)
+        expect(father.el.attr('_node_level')).toBe('0');
+
+        expect(child.name).toBe('child');
+        expect(child.level).toBe(1)
+        expect(child.el.attr('_node_level')).toBe('1');
+
+        expect(grand_child.name).toBe('grand_child');
+        expect(grand_child.level).toBe(2)
+        expect(grand_child.el.attr('_node_level')).toBe('2');
+      });
+
       it("creates a node with two children", function() {
-        data = {name:'father'};
+        var data = {name:'father'};
         data.children = [{name:'child1'}, {name:'child2'}]
-        node = new Node(data);
+        var node = new Node(data);
 
         expect(node.name).toBe('father');
         expect(node instanceof Node).toBe(true);
@@ -55,8 +80,8 @@ describe("Node", function() {
       });
 
       it("sets the object passed inside me propertie", function() {
-        data = {name:'name', attr1:'attr1', attr2:'attr2', attr3:'attr3', attr4:'attr4', attr5:'attr5'};
-        node = new Node(data);
+        var data = {name:'name', attr1:'attr1', attr2:'attr2', attr3:'attr3', attr4:'attr4', attr5:'attr5'};
+        var node = new Node(data);
         expect(node.me.name).toBe('name');
         expect(node.me.attr1).toBe('attr1');
         expect(node.me.attr2).toBe('attr2');
@@ -72,7 +97,7 @@ describe("Node", function() {
       describe("html creation inside root node", function() {
 
         it("node with no children", function() {
-          node = new Node({id:'my_id', name:'node1'});
+          var node = new Node({id:'my_id', name:'node1'});
 
           expect(node.el.attr('id')).toBe('my_id');
           expect(node.el.find('.marker').length).toBe(1);
@@ -114,9 +139,9 @@ describe("Node", function() {
       describe("opening and closing node", function() {
 
         it("shows and hides children when span.name is clicked", function() {
-          raw_node = {name:'father'}
+          var raw_node = {name:'father'}
           raw_node.children = [{name:'child'}];
-          node = new Node(raw_node);
+          var node = new Node(raw_node);
 
           expect(node.el.find('.children:eq(0)').css('display')).toBe('none');
           node.el.find('span.name:eq(0)').click();
@@ -130,22 +155,21 @@ describe("Node", function() {
       describe("node checkbox", function() {
 
         it("starts with status as 'unchecked'", function() {
-          raw_node = {name:'father'}
+          var raw_node = {name:'father'}
           raw_node.children = [{name:'child'}];
-          node = new Node(raw_node);
+          var node = new Node(raw_node);
           expect(node.status).toBe('unchecked')
         });
 
         it("maker element starts with class 'unchecked'", function() {
-          raw_node = {name:'father'}
+          var raw_node = {name:'father'}
           raw_node.children = [{name:'child'}];
-          node = new Node(raw_node);
+          var node = new Node(raw_node);
           expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker unchecked')
         });
 
         it("toggle status between 'unchecked' and 'checked' when span.marker is clicked", function() {
-          raw_node = {name:'father'}
-          node = new Node(raw_node);
+          var node = new Node({name:'father'});
           
           expect(node.status).toBe('unchecked');
           node.el.find('span.marker:eq(0)').click();
@@ -155,8 +179,8 @@ describe("Node", function() {
         });
 
         it("toggle status between 'unchecked' and 'checked' when span.marker is clicked", function() {
-          raw_node = {name:'father'}
-          node = new Node(raw_node);
+          var raw_node = {name:'father'}
+          var node = new Node(raw_node);
           
           expect(node.status).toBe('unchecked');
           node.el.find('span.marker:eq(0)').click();
@@ -166,9 +190,9 @@ describe("Node", function() {
         });
 
         it("toggles maker element class between 'unchecked' and 'checked'", function() {
-          raw_node = {name:'father'}
+          var raw_node = {name:'father'}
           raw_node.children = [{name:'child'}];
-          node = new Node(raw_node);
+          var node = new Node(raw_node);
 
           expect(node.el.find('.marker:eq(0)').attr('class')).toBe('marker unchecked')
           node.el.find('span.marker:eq(0)').click();
@@ -178,9 +202,9 @@ describe("Node", function() {
         });
 
         it("uncheck all nodes", function() {
-          raw_node = {name:'father'}
+          var raw_node = {name:'father'}
           raw_node.children = [{name:'child'}];
-          node = new Node(raw_node);
+          var node = new Node(raw_node);
 
           //check our two nodes
           node.el.find('span.marker:eq(0)').click();
@@ -198,9 +222,9 @@ describe("Node", function() {
         });
 
         it("toggle checkbox status", function() {
-          raw_node = {name:'father'}
+          var raw_node = {name:'father'}
           raw_node.children = [{name:'child'}];
-          node = new Node(raw_node);
+          var node = new Node(raw_node);
 
           node.check_all_nodes();
           expect(node.status).toBe('checked')
@@ -229,10 +253,10 @@ describe("Node", function() {
 
   describe("child node changing affecting parents", function() {
     it("changes its child status when someone else change it by reference", function() {
-      raw_node = {name:'father'}
+      var raw_node = {name:'father'}
       raw_node.children = [{name:'child'}];
-      father = new Node(raw_node);
-      child = father.children[0];
+      var father = new Node(raw_node);
+      var child = father.children[0];
 
       child.check_node();
       expect(child.status).toBe('checked')
@@ -243,7 +267,7 @@ describe("Node", function() {
   });
 
   it("gets node by id", function() {
-    raw_node = {id:'1', name:'node1'}
+    var raw_node = {id:'1', name:'node1'}
     raw_node.children = [];
     raw_node.children.push({id:'2', name:'node2'});
     raw_node.children.push({id:'3', name:'node3'});
@@ -258,7 +282,7 @@ describe("Node", function() {
   });
 
   it("gets checked nodes", function() {
-    raw_node = {id:'1', name:'node1'}
+    var raw_node = {id:'1', name:'node1'}
     raw_node.children = [];
     raw_node.children.push({id:'2', name:'node2'});
     raw_node.children.push({id:'3', name:'node3'});
@@ -295,7 +319,7 @@ describe("Node", function() {
   });
 
   it("gets unchecked nodes", function() {
-    raw_node = {id:'1', name:'node1'}
+    var raw_node = {id:'1', name:'node1'}
     raw_node.children = [];
     raw_node.children.push({id:'2', name:'node2'});
     raw_node.children.push({id:'3', name:'node3'});
@@ -338,13 +362,13 @@ describe("TreeBoo", function() {
   describe("object creation", function() {
 
     it("creates one Node", function() {
-      node_array = new TreeBoo([{name:'name'}]);
+      var node_array = new TreeBoo([{name:'name'}]);
       expect(node_array.nodes.length).toBe(1);
       expect(node_array.nodes[0] instanceof Node).toBe(true);
     });
 
     it("creates three Node", function() {
-      node_array = new TreeBoo([{name:'name1'}, {name:'name2'}, {name:'name3'}]);
+      var node_array = new TreeBoo([{name:'name1'}, {name:'name2'}, {name:'name3'}]);
       expect(node_array.nodes.length).toBe(3);
       expect(node_array.nodes[0] instanceof Node).toBe(true);
       expect(node_array.nodes[1] instanceof Node).toBe(true);
@@ -356,7 +380,7 @@ describe("TreeBoo", function() {
   describe("html creation", function() {
 
     it("creates correct html for two nodes", function() {
-      node_array = new TreeBoo([{name:'name1'}, {name:'name2'}]);
+      var node_array = new TreeBoo([{name:'name1'}, {name:'name2'}]);
 
       expect(node_array.html.find('.node').length).toBe(2);
       expect(node_array.html.find('.node:eq(0)').find('.name:eq(0)').text().trim()).toBe('name1');
