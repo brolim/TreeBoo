@@ -13,21 +13,65 @@
 
 <script type="text/javascript">
   $(function(){
-    var node111 = {name:'node1.1.1'};
-    var node112 = {name:'node1.1.2'};
-    var node11 = {name:'node1.1', children: [node111, node112]};
-    var node12 = {name:'node1.2'};
-    var node1 = {name: 'node1', children: [node11, node12]};
+    var data = [
+      {
+        id: 'your_id1',
+        name: 'node1', 
+        children: [
+          {
+            id: 'your_id2',
+            name:'node1.1', 
+            children: [
+              {
+                id: 'your_id3',
+                name:'node1.1.1'
+              }, 
+              {
+                id: 'your_id4',
+                name:'node1.1.2'
+              }
+            ]
+          },
+          {
+            id: 'your_id5',
+            name:'node1.2'
+          }
+        ]
+      },
 
-    var node21 = {name:'node2.1'};
-    var node22 = {name:'node2.2'};
-    var node2 = {name: 'node2', children: [node21, node22]};
-    
-    var node31 = {name:'node3.1'};
-    var node32 = {name:'node3.2'};
-    var node3 = {name: 'node3', children: [node31, node32]};
+      {
+        id: 'your_id6',
+        name: 'node2', 
+        children: [
+          {
+            id: 'your_id7',
+            name:'node2.1'
+          }, 
+          {
+            id: 'your_id8',
+            name:'node2.2'
+          }
+        ]
+      },
 
-    tree = new TreeBoo([node1, node2, node3]);
+      {
+        id: 'your_id9',
+        name: 'node3', 
+        children: [
+          {
+            id: 'your_id10',
+            name:'node3.1'
+          }, 
+          {
+            id: 'your_id11',
+            name:'node3.2'
+          }
+        ]
+      }
+    ];
+
+
+    tree = new TreeBoo(data);
     $('body').append(tree.html);
   });
 </script>

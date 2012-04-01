@@ -107,8 +107,6 @@ describe("Node", function() {
           expect(node.el.find('.name:eq(3)').text().trim()).toBe('grand_child2');
           expect(node.el.find('.children:eq(3)').length).toBe(1);
           expect(node.el.find('.children:eq(3)').css('display')).toBe('none');
-
-          console.log(node.el);
         });
 
       });
