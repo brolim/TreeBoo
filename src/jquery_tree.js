@@ -87,7 +87,7 @@ Node.prototype.check_all_nodes = function() {
 };
 
 Node.prototype._nodes_by_status = function(status) {
-  var nodes = []
+  var nodes = [];
   if(this.status == status){
     nodes.push(this);
   }
@@ -95,6 +95,9 @@ Node.prototype._nodes_by_status = function(status) {
   this.children.forEach(function(node) {
     if(node.status == status){
       nodes.push(node);
+    }
+    if(node.children.length>0){
+      nodes = nodes.concat(node._nodes_by_status(status));
     }
   });
 

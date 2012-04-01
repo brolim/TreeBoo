@@ -34,7 +34,7 @@ describe("Node", function() {
         expect(node.children[0].children[0] instanceof Node).toBe(true);
       });
 
-      it("identifies node level in level attribute for every node", function() {
+      it("identifies node level for every node", function() {
         var father = {id:'father', name:'father'};
         var child = {id:'child', name:'child'};
         var grand_child = {id:'grand_child', name:'grand_child'};
@@ -49,14 +49,17 @@ describe("Node", function() {
         expect(father.name).toBe('father');
         expect(father.level).toBe(0)
         expect(father.el.attr('_node_level')).toBe('0');
+        expect(father.el.attr('class')).toBe('node level0');
 
         expect(child.name).toBe('child');
         expect(child.level).toBe(1)
         expect(child.el.attr('_node_level')).toBe('1');
+        expect(child.el.attr('class')).toBe('node level1');
 
         expect(grand_child.name).toBe('grand_child');
         expect(grand_child.level).toBe(2)
         expect(grand_child.el.attr('_node_level')).toBe('2');
+        expect(grand_child.el.attr('class')).toBe('node level2');
       });
 
       it("creates a node with two children", function() {
@@ -316,6 +319,22 @@ describe("Node", function() {
     expect(node1.checked_nodes()[1]).toBe(node2);
     expect(node1.checked_nodes()[2]).toBe(node3);
     expect(node1.checked_nodes()[3]).toBe(node4);
+  });
+
+  it("gets grand_child checked node", function() {
+    var raw_node = {id:'1', name:'node1'}
+    raw_node.children = [];
+    raw_node.children.push({id:'2', name:'node2', children:[{id:'5', name:'grand_child'}]});
+    raw_node.children.push({id:'3', name:'node3'});
+    raw_node.children.push({id:'4', name:'node4'});
+
+    var node1 = new Node(raw_node);
+    var grand_child = node1.children[0].children[0];
+
+    grand_child.check_node();
+    expect(node1.checked_nodes().length).toBe(1);
+    expect(node1.checked_nodes()[0]).toBe(grand_child);
+
   });
 
   it("gets unchecked nodes", function() {
