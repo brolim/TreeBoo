@@ -1,4 +1,65 @@
-<img src="imgs/tree.png">
 
-To learn how to use the code, read jquery_tree_spec.js code =)
-To be updated! =P
+
+                        TreeBoo
+
+    You build your data. TreBoo do the tree HTML for it.
+
+---------------------------------------------------------------    
+
+
+  WHAT IS THIS?
+    A free JS tree component to use on your web page.
+    Simple to use and to modify.
+    Tested with Jasmine.js.
+
+
+
+  WHAT DOES IT DO?
+    The spec/jquery_tree_spec.js specifies this software
+
+
+
+  HOW TO USE?
+    spec/visual_spec.html shows how to use the Software.
+    It uses style/jquery_tree.css to render a fixed data created on HTML.
+
+
+
+  HOW TO BUILD YOUR DATA
+    father = {
+      id:'father_id',
+      name:'father_name'
+    }
+    child = {
+      id:'child_id',
+      name:'child_name'
+    }
+    father.children = [child]
+
+
+
+  AVAILABLE METHODS
+    json_node = {id:'', name:'', children:[]}
+      JSON node
+
+    new TreeBoo([json_node1, json_node2, ...])
+      builds the TreeBoo object and all Node objs inside it
+
+    new Node()
+      builds the Node object
+
+    node.node(node_id)
+      returns itself or a child that is under node_id
+
+    node.uncheck_node()
+    node.check_node()
+      change node status toggling it between 'checked' and 'unchecked'
+
+    node.uncheck_all_nodes()
+    node.check_all_nodes()
+      change status of itself and its children
+
+    node.checked_nodes()
+    node.unchecked_nodes()
+      get a Node array
+      
