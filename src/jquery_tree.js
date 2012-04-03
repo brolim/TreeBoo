@@ -23,6 +23,7 @@ Node = function(me, level){
   if(me.children){
     me.children.forEach(function(raw_child) {
       var new_node = new Node(raw_child, self.level+1);
+      new_node.parent = self;
       self.children.push(new_node);
       self.el.find('.children:eq(0)').append(new_node.el);
     });
@@ -30,7 +31,14 @@ Node = function(me, level){
 
   this.el.find('span.name:eq(0)').click(function(){
     var children = self.el.find('.children:eq(0)');
-    children.slideToggle();
+    if(children.css('display')=='none'){
+      children.slideDown();
+      self.el.trigger('children_was_opened');
+    }
+    else{
+      children.slideUp();
+      self.el.trigger('children_was_closed');
+    }
   });
 
   this.el.find('span.marker:eq(0)').click(function(){
@@ -63,6 +71,7 @@ Node.prototype.uncheck_node = function() {
   this.el.find('.marker:eq(0)').removeClass('checked');
   this.status = 'unchecked';
   this.el.find('.marker:eq(0)').addClass('unchecked');
+  this.el.trigger('node_was_unchecked');
 };
 
 Node.prototype.check_node = function() {
@@ -70,6 +79,7 @@ Node.prototype.check_node = function() {
   this.el.find('.marker:eq(0)').removeClass('checked');
   this.status = 'checked';
   this.el.find('.marker:eq(0)').addClass('checked');
+  this.el.trigger('node_was_checked');
 };
 
 Node.prototype.uncheck_all_nodes = function() {
@@ -114,14 +124,15 @@ Node.prototype.unchecked_nodes = function() {
   
 TreeBoo = function(raw_nodes) {
   this.version = '0.1.0';
-  this.nodes = []
   var self = this;
+
+  this.roots = []
   raw_nodes.forEach(function(raw_node) {
-    self.nodes.push(new Node(raw_node));
+    self.roots.push(new Node(raw_node));
   });
 
   this.html = $('<div id=tree></div>');
-  this.nodes.forEach(function(node) {
+  this.roots.forEach(function(node) {
     self.html.append(node.el);
   });
 }

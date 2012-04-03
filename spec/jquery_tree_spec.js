@@ -82,7 +82,17 @@ describe("Node", function() {
         expect(children[1] instanceof Node).toBe(true);
       });
 
-      it("sets the object passed inside me propertie", function() {
+      it("sets node parent attr correctly", function() {
+        var data = {name:'father'};
+        data.children = [{name:'child1'}, {name:'child2'}]
+        var node = new Node(data);
+
+        expect(node.parent).toBe(undefined);
+        expect(node.children[0].parent).toBe(node);
+        expect(node.children[1].parent).toBe(node);
+      });
+
+      it("sets the object passed inside me attr", function() {
         var data = {name:'name', attr1:'attr1', attr2:'attr2', attr3:'attr3', attr4:'attr4', attr5:'attr5'};
         var node = new Node(data);
         expect(node.me.name).toBe('name');
@@ -254,6 +264,57 @@ describe("Node", function() {
 
   });
 
+  describe("events binding", function() {
+    it("trigger a 'node_was_checked' event when a node is checked", function() {
+      var raw_node = {name:'father'}
+      raw_node.children = [{name:'child'}];
+      var node = new Node(raw_node);
+
+      var triggered = false;
+      node.el.bind('node_was_checked', function() {
+        triggered = true;
+      });
+
+      node.children[0].check_node();
+      expect(triggered).toBe(true);
+    });
+
+    it("trigger a 'node_was_unchecked' event when a node is unchecked", function() {
+      var raw_node = {name:'father'}
+      raw_node.children = [{name:'child'}];
+      var node = new Node(raw_node);
+
+      var triggered = false;
+      node.el.bind('node_was_unchecked', function() {
+        triggered = true;
+      });
+
+      node.children[0].check_node();
+      node.children[0].uncheck_node();
+      expect(triggered).toBe(true);
+    });
+
+    it("triggers a 'children_was_opened' or 'children_was_closed' event depending on children visibility", function() {
+      var raw_node = {name:'father'}
+      raw_node.children = [{name:'child'}];
+      var node = new Node(raw_node);
+
+      var triggered = false;
+      node.el.bind('children_was_opened', function() {
+        triggered = true;
+      });
+      node.children[0].el.find('span.name:eq(0)').click()
+      expect(triggered).toBe(true);
+
+      var triggered = false;
+      node.el.bind('children_was_closed', function() {
+        triggered = true;
+      });
+      node.children[0].el.find('span.name:eq(0)').click()
+      expect(triggered).toBe(true);
+    });
+  });
+
   describe("child node changing affecting parents", function() {
     it("changes its child status when someone else change it by reference", function() {
       var raw_node = {name:'father'}
@@ -381,17 +442,17 @@ describe("TreeBoo", function() {
   describe("object creation", function() {
 
     it("creates one Node", function() {
-      var node_array = new TreeBoo([{name:'name'}]);
-      expect(node_array.nodes.length).toBe(1);
-      expect(node_array.nodes[0] instanceof Node).toBe(true);
+      var tree_boo = new TreeBoo([{name:'name'}]);
+      expect(tree_boo.roots.length).toBe(1);
+      expect(tree_boo.roots[0] instanceof Node).toBe(true);
     });
 
     it("creates three Node", function() {
-      var node_array = new TreeBoo([{name:'name1'}, {name:'name2'}, {name:'name3'}]);
-      expect(node_array.nodes.length).toBe(3);
-      expect(node_array.nodes[0] instanceof Node).toBe(true);
-      expect(node_array.nodes[1] instanceof Node).toBe(true);
-      expect(node_array.nodes[2] instanceof Node).toBe(true);
+      var tree_boo = new TreeBoo([{name:'name1'}, {name:'name2'}, {name:'name3'}]);
+      expect(tree_boo.roots.length).toBe(3);
+      expect(tree_boo.roots[0] instanceof Node).toBe(true);
+      expect(tree_boo.roots[1] instanceof Node).toBe(true);
+      expect(tree_boo.roots[2] instanceof Node).toBe(true);
     });
 
   });
@@ -399,11 +460,11 @@ describe("TreeBoo", function() {
   describe("html creation", function() {
 
     it("creates correct html for two nodes", function() {
-      var node_array = new TreeBoo([{name:'name1'}, {name:'name2'}]);
+      var tree_boo = new TreeBoo([{name:'name1'}, {name:'name2'}]);
 
-      expect(node_array.html.find('.node').length).toBe(2);
-      expect(node_array.html.find('.node:eq(0)').find('.name:eq(0)').text().trim()).toBe('name1');
-      expect(node_array.html.find('.node:eq(1)').find('.name:eq(0)').text().trim()).toBe('name2');
+      expect(tree_boo.html.find('.node').length).toBe(2);
+      expect(tree_boo.html.find('.node:eq(0)').find('.name:eq(0)').text().trim()).toBe('name1');
+      expect(tree_boo.html.find('.node:eq(1)').find('.name:eq(0)').text().trim()).toBe('name2');
     });
 
   });
