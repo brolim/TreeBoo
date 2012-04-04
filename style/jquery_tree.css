@@ -21,6 +21,10 @@
   background-position: 0px 54px;
 }
 
+.selected{
+  background: yellow !important;
+}
+
 .name{
   cursor: pointer;
   color: #464c4d;

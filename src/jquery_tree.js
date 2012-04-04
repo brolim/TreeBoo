@@ -11,6 +11,7 @@ _node_template = _.template("\n\
 
 Node = function(me, level){
   this.name = me.name;
+  this.selected = false;
   this.id = me.id;
   this.me = me;
   this.status = 'unchecked';
@@ -74,6 +75,16 @@ Node.prototype.uncheck_node = function() {
   this.el.trigger('node_was_unchecked');
 };
 
+Node.prototype.select_node = function() {
+  this.el.find('span.name:eq(0)').addClass('selected');
+  this.selected = true;
+};
+
+Node.prototype.unselect_node = function() {
+  this.el.find('span.name:eq(0)').removeClass('selected');
+  this.selected = false;
+};
+
 Node.prototype.check_node = function() {
   this.el.find('.marker:eq(0)').removeClass('unchecked');
   this.el.find('.marker:eq(0)').removeClass('checked');
@@ -134,6 +145,12 @@ TreeBoo = function(raw_nodes) {
   this.html = $('<div id=tree></div>');
   this.roots.forEach(function(node) {
     self.html.append(node.el);
+  });
+
+  this.html.keydown(function(event) {
+    console.log(event);
+    if(event.keyCode==40) //down
+      self.roots[0].select_node();
   });
 }
 
